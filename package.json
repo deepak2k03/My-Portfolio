@@ -1,0 +1,19 @@
+{
+  "name": "mern-portfolio",
+  "version": "1.0.0",
+  "description": "Modern MERN stack portfolio for Deepak Singh",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["mern", "portfolio", "react", "node", "mongodb"],
+  "author": "Deepak Singh",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
