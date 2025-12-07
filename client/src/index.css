@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-start: #667eea;
+    --gradient-end: #764ba2;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  }
+
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glass-morphism {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl;
+  }
+
+  .btn-primary {
+    @apply gradient-bg text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity duration-300;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300;
+  }
+
+  .floating-shape {
+    @apply absolute rounded-full opacity-20;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
