@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionHeader from '../components/common/SectionHeader'
 import ProjectCard from '../components/projects/ProjectCard'
-import { projects, getAllCategories } from '../../data/projectsData'
+import { projects, getAllCategories } from '../data/projectsData'
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState('All')
