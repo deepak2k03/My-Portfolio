@@ -59,6 +59,7 @@ export const navigation = [
   { name: "About", href: "/about", current: false },
   { name: "Skills", href: "/skills", current: false },
   { name: "Projects", href: "/projects", current: false },
+  { name: "Achievements", href: "/achievements", current: false },
   { name: "Experience", href: "/experience", current: false },
   { name: "Interviews", href: "/interviews", current: false },
   { name: "Contact", href: "/contact", current: false }

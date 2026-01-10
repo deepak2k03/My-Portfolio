@@ -1,69 +1,58 @@
+// client/src/data/skillsData.js
+
+// You can use emojis or string icons if you don't want to import Lucide icons here
+// The UI component handles the icons dynamically now.
+
 export const skillsCategories = [
   {
-    id: 'frontend',
+    id: 'Frontend',
     name: 'Frontend',
-    icon: '🎨',
     skills: [
       { name: 'React', level: 90, icon: '⚛️' },
-      { name: 'React Router', level: 85, icon: '🛣️' },
+      { name: 'TypeScript', level: 85, icon: 'ts' },
+      { name: 'Tailwind CSS', level: 95, icon: '🎨' },
+      { name: 'Framer Motion', level: 80, icon: '✨' },
       { name: 'Redux', level: 75, icon: '🔄' },
-      { name: 'JavaScript', level: 95, icon: '📜' },
-      { name: 'TypeScript', level: 80, icon: '📘' },
-      { name: 'HTML5', level: 90, icon: '🌐' },
-      { name: 'CSS3', level: 88, icon: '🎨' },
-      { name: 'Tailwind CSS', level: 85, icon: '🎭' },
-      { name: 'Bootstrap', level: 70, icon: '🅱️' }
-    ]
+      { name: 'Next.js', level: 85, icon: '▲' },
+    ],
   },
   {
-    id: 'backend',
+    id: 'Backend',
     name: 'Backend',
-    icon: '⚙️',
     skills: [
-      { name: 'Node.js', level: 85, icon: '🟢' },
-      { name: 'Express.js', level: 90, icon: '🚂' },
+      { name: 'Node.js', level: 88, icon: '🟢' },
+      { name: 'Express', level: 90, icon: '🚂' },
       { name: 'MongoDB', level: 85, icon: '🍃' },
-      { name: 'Mongoose', level: 80, icon: '🦫' },
-      { name: 'REST APIs', level: 88, icon: '🔌' },
-      { name: 'GraphQL', level: 65, icon: '📊' },
-      { name: 'JWT', level: 75, icon: '🔑' },
-      { name: 'Socket.io', level: 70, icon: '💬' }
-    ]
+      { name: 'PostgreSQL', level: 70, icon: '🐘' },
+      { name: 'REST APIs', level: 92, icon: '🔌' },
+      { name: 'GraphQL', level: 65, icon: '🕸️' },
+    ],
   },
   {
-    id: 'tools',
-    name: 'Database & Tools',
-    icon: '🔧',
+    id: 'Tools',
+    name: 'Tools & DevOps',
     skills: [
-      { name: 'Git', level: 90, icon: '📦' },
-      { name: 'GitHub', level: 88, icon: '🐙' },
-      { name: 'NPM', level: 85, icon: '📦' },
+      { name: 'Git & GitHub', level: 90, icon: '🐙' },
       { name: 'Docker', level: 60, icon: '🐳' },
-      { name: 'Postman', level: 80, icon: '📬' },
-      { name: 'VS Code', level: 95, icon: '💻' },
-      { name: 'Chrome DevTools', level: 85, icon: '🔍' },
-      { name: 'Webpack', level: 65, icon: '📦' }
-    ]
+      { name: 'AWS', level: 50, icon: '☁️' },
+      { name: 'Postman', level: 95, icon: '🚀' },
+      { name: 'VS Code', level: 100, icon: '📝' },
+    ],
   },
   {
-    id: 'soft-skills',
+    id: 'SoftSkills',
     name: 'Soft Skills',
-    icon: '💡',
     skills: [
-      { name: 'Problem Solving', level: 95, icon: '🧩' },
-      { name: 'Team Collaboration', level: 90, icon: '👥' },
-      { name: 'Communication', level: 85, icon: '💬' },
-      { name: 'Time Management', level: 88, icon: '⏰' },
-      { name: 'Adaptability', level: 90, icon: '🔄' },
-      { name: 'Critical Thinking', level: 92, icon: '🤔' }
-    ]
-  }
-]
+      { name: 'Problem Solving', level: 90, icon: '🧩' },
+      { name: 'Team Leadership', level: 85, icon: '👥' },
+      { name: 'Communication', level: 95, icon: '📢' },
+    ],
+  },
+];
 
 export const getSkillLevel = (level) => {
-  if (level >= 90) return 'Expert'
-  if (level >= 80) return 'Advanced'
-  if (level >= 70) return 'Intermediate'
-  if (level >= 60) return 'Basic'
-  return 'Beginner'
-}
+  if (level >= 90) return 'Expert';
+  if (level >= 80) return 'Advanced';
+  if (level >= 60) return 'Intermediate';
+  return 'Beginner';
+};

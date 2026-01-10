@@ -1,262 +1,109 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import HeroSection from '../components/layout/HeroSection'
 import SectionHeader from '../components/common/SectionHeader'
 import { skillsCategories } from '../data/skillsData'
 import { getFeaturedProjects } from '../data/projectsData'
-import SkillCard from '../components/skills/SkillCard'
 import ProjectCard from '../components/projects/ProjectCard'
+import { ArrowRight, Code2, Layers, Terminal, Zap, Hash, Database, Cpu, Globe, Server } from 'lucide-react'
+
+// ... (Keep your existing SpotlightCard component here) ...
+// ... (Keep your existing SpotlightCard component here) ...
 
 const Home = () => {
   const featuredProjects = getFeaturedProjects()
-  const featuredSkills = skillsCategories.flatMap(category =>
-    category.skills.filter(skill => skill.level >= 85).slice(0, 2)
+  
+  // Parallax Setup
+  const { scrollY } = useScroll()
+  const y1 = useTransform(scrollY, [0, 500], [0, 200])
+  const y2 = useTransform(scrollY, [0, 500], [0, -150])
+
+  // --- PREPARING DATA FOR THE STREAMS ---
+  // We split skills into two arrays to create two opposite-moving rows
+  const allSkills = skillsCategories.flatMap(cat => cat.skills).filter(s => s.level > 70)
+  const row1 = allSkills.slice(0, Math.ceil(allSkills.length / 2))
+  const row2 = allSkills.slice(Math.ceil(allSkills.length / 2))
+
+  // Helper for the Pill Design
+  const SkillPill = ({ name, icon: Icon }) => (
+    <div className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-purple-500/30 transition-colors group cursor-default">
+      <span className="text-purple-400 group-hover:text-purple-300 transition-colors">
+        {Icon ? <Icon size={16} /> : <Hash size={16} />}
+      </span>
+      <span className="text-sm font-medium tracking-wide text-slate-300 font-mono">
+        {name}
+      </span>
+    </div>
   )
 
   return (
-    <div>
-      {/* Hero Section */}
-      <HeroSection />
+    <div className="relative min-h-screen bg-[#020202] text-slate-50 overflow-hidden selection:bg-purple-500/30">
+      
+      {/* Background Noise & Blobs (Keep existing code) */}
+      <div className="fixed inset-0 opacity-[0.04] pointer-events-none z-0 mix-blend-overlay" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
+      <motion.div style={{ y: y1, x: -100 }} className="fixed top-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[120px] pointer-events-none z-0" />
+      <motion.div style={{ y: y2, x: 100 }} className="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none z-0" />
 
-      {/* Featured Skills Preview */}
-      <section className="py-16 lg:py-24 bg-white dark:bg-gray-900 transition-colors duration-300">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <SectionHeader
-              title="Core Technologies"
-              subtitle="Technologies I work with most frequently"
-              centered
-            />
-          </motion.div>
+      <div className="relative z-10">
+        
+        <HeroSection />
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mt-12"
-          >
-            {featuredSkills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.4,
-                  delay: index * 0.1,
-                  type: 'spring',
-                  stiffness: 100
-                }}
-                viewport={{ once: true }}
-              >
-                <SkillCard skill={skill} compact />
-              </motion.div>
-            ))}
-          </motion.div>
+        {/* --- 3. THE UPGRADED "TECH HIGHWAY" --- */}
+        <div className="py-20 relative space-y-8 overflow-hidden">
+          
+          {/* Gradient Masks for smooth fade edges */}
+          <div className="absolute inset-y-0 left-0 w-20 md:w-60 bg-gradient-to-r from-[#020202] to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 md:w-60 bg-gradient-to-l from-[#020202] to-transparent z-20 pointer-events-none" />
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <motion.a
-              href="/skills"
-              className="inline-flex items-center px-6 py-3 border border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 rounded-lg hover:bg-purple-600 hover:text-white dark:hover:bg-purple-400 dark:hover:text-gray-900 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          {/* Label */}
+          <div className="text-center mb-10 opacity-60">
+             <span className="text-xs font-mono uppercase tracking-[0.3em] text-purple-400 border border-purple-500/30 px-3 py-1 rounded-full">
+                Core Technologies
+             </span>
+          </div>
+
+          {/* Row 1: Scrolling Left (Slower, elegant) */}
+          <div className="flex overflow-hidden">
+            <motion.div 
+              className="flex gap-4 pr-4"
+              initial={{ x: 0 }}
+              animate={{ x: "-50%" }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 40 }} // Slower duration = more premium
             >
-              View All Skills
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <SectionHeader
-              title="Featured Projects"
-              subtitle="Some of my recent work that I'm particularly proud of"
-              centered
-            />
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            {featuredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.2,
-                  type: 'spring',
-                  stiffness: 100
-                }}
-                viewport={{ once: true }}
-              >
-                <ProjectCard project={project} featured />
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <motion.a
-              href="/projects"
-              className="inline-flex items-center px-6 py-3 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View All Projects
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Quick About Preview */}
-      <section className="py-16 lg:py-24 bg-white dark:bg-gray-900 transition-colors duration-300">
-        <div className="container-custom">
-          <motion.div
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            {/* Left side - Image/Visual */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-2xl gradient-bg p-8 flex items-center justify-center">
-                <div className="text-8xl">👨‍💻</div>
-              </div>
-
-              {/* Floating elements */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center text-2xl"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-              >
-                💡
-              </motion.div>
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-xl"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                🚀
-              </motion.div>
+              {[...row1, ...row1, ...row1, ...row1].map((skill, i) => (
+                <SkillPill key={`r1-${i}`} name={skill.name} icon={Code2} />
+              ))}
             </motion.div>
+          </div>
 
-            {/* Right side - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
+          {/* Row 2: Scrolling Right (Opposite direction) */}
+          <div className="flex overflow-hidden">
+            <motion.div 
+              className="flex gap-4 pr-4"
+              initial={{ x: "-50%" }}
+              animate={{ x: 0 }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 45 }} // Slightly different speed creates depth
             >
-              <SectionHeader
-                title="About Me"
-                subtitle="Passionate MERN Stack Developer"
-              />
-
-              <div className="space-y-4 text-gray-600 dark:text-gray-300">
-                <p>
-                  I'm a final-year B.Tech IT student specializing in the MERN stack.
-                  I love building scalable web applications and solving complex problems
-                  through code.
-                </p>
-                <p>
-                  My journey in web development started 3+ years ago, and since then,
-                  I've worked on numerous projects ranging from e-commerce platforms
-                  to real-time collaboration tools.
-                </p>
-                <p>
-                  I believe in writing clean, maintainable code and am always eager to
-                  learn new technologies and best practices. When I'm not coding, you'll
-                  find me solving DSA problems or contributing to open source projects.
-                </p>
-              </div>
-
-              <motion.a
-                href="/about"
-                className="inline-flex items-center mt-8 px-6 py-3 border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 rounded-lg hover:bg-purple-600 hover:text-white dark:hover:bg-purple-400 dark:hover:text-gray-900 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Learn More About Me
-                <svg
-                  className="w-4 h-4 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </motion.a>
+              {[...row2, ...row2, ...row2, ...row2].map((skill, i) => (
+                <SkillPill key={`r2-${i}`} name={skill.name} icon={Database} />
+              ))}
             </motion.div>
-          </motion.div>
+          </div>
+          
         </div>
-      </section>
+        {/* --- END UPGRADE --- */}
+
+        {/* ... Rest of your sections (Bento Grid, Projects, etc.) ... */}
+        
+        {/* Bento Grid Metrics */}
+        <section className="py-24 container-custom">
+            {/* ... Keep existing Bento Grid code ... */}
+        </section>
+
+        {/* ... Keep rest of the file same ... */}
+
+      </div>
     </div>
   )
 }

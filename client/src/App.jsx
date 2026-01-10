@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion' // Import AnimatePresence
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/layout/ScrollToTop'
@@ -13,149 +13,39 @@ import Experience from './pages/Experience'
 import Interviews from './pages/Interviews'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
-
-const pageVariants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  in: {
-    opacity: 1,
-    y: 0,
-  },
-  out: {
-    opacity: 0,
-    y: -20,
-  },
-}
-
-const pageTransition = {
-  type: 'tween',
-  ease: 'anticipate',
-  duration: 0.4,
-}
+import InterviewDetail from './pages/InterviewDetail'
+import Achievements from './pages/Achievements'
 
 function App() {
+  const location = useLocation() // Needed for AnimatePresence to track route changes
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    // 1. Updated Background to match new Dark Theme (#020202)
+    <div className="min-h-screen bg-[#020202] text-slate-50 selection:bg-purple-500/30 font-sans">
       <Navbar />
       <ScrollToTop />
-      <main className="pt-16">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <Home />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <About />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/skills"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <Skills />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/projects"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <Projects />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/experience"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <Experience />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/interviews"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <Interviews />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <Contact />
-              </motion.div>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <motion.div
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                <NotFound />
-              </motion.div>
-            }
-          />
-        </Routes>
+      
+      {/* 2. Removed 'pt-16'. New Hero section needs to be at the very top behind the glass navbar */}
+      <main className="relative">
+        
+        {/* 3. Global Page Transition Wrapper */}
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/interviews" element={<Interviews />} />
+            <Route path="/interviews/:id" element={<InterviewDetail />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AnimatePresence>
+        
       </main>
+
       <Footer />
     </div>
   )

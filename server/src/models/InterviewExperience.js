@@ -57,7 +57,7 @@ const interviewSchema = new mongoose.Schema({
     preparation: {
       type: String,
       required: true,
-      minlength: 100,
+      minlength: 10,
       trim: true
     },
     technicalQuestions: [{
@@ -95,10 +95,6 @@ const interviewSchema = new mongoose.Schema({
       type: String,
       trim: true
     }
-  },
-  companyLogo: {
-    type: String,
-    trim: true
   },
   tags: [{
     type: String,

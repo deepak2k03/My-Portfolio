@@ -1,150 +1,142 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from '../../context/ThemeContext'
-import ThemeToggle from './ThemeToggle'
-import { navigation } from '../../data/staticData'
+import { Menu, X, Terminal } from 'lucide-react'
+import ThemeToggle from "../common/ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
-  const navigate = useNavigate()
-  const { theme } = useTheme()
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false)
+  }, [location])
+
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      setScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    setIsOpen(false)
-  }, [location.pathname])
-
-  const handleNavClick = (href) => {
-    navigate(href)
-    setIsOpen(false)
-  }
-
-  const isActive = (path) => {
-    if (path === '/') {
-      return location.pathname === '/'
-    }
-    return location.pathname.startsWith(path)
-  }
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Skills', path: '/skills' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Achievements', path: '/achievements' },
+    { name: 'Experience', path: '/experience' },
+    { name: 'Interviews', path: '/interviews' },
+    { name: 'Contact', path: '/contact' },
+  ]
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-[#020202]/80 backdrop-blur-md border-b border-white/5 py-4' 
+          : 'bg-transparent py-6'
       }`}
     >
-      <div className="container-custom">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center space-x-2 text-2xl font-bold text-gradient hover:scale-105 transition-transform duration-200"
-          >
-            <span className="w-10 h-10 gradient-bg rounded-full flex items-center justify-center text-white font-bold">
-              DS
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  isActive(item.href)
-                    ? 'text-purple-600 dark:text-purple-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
-                }`}
-              >
-                {item.name}
-                {isActive(item.href) && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 dark:bg-purple-400"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </Link>
-            ))}
+      <div className="container-custom flex justify-between items-center">
+        
+        {/* Logo */}
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 group"
+          onClick={() => setIsOpen(false)}
+        >
+          <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:border-purple-500/50 transition-colors">
+            <Terminal size={20} className="text-purple-400" />
           </div>
+          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            Deepak<span className="text-purple-500">.dev</span>
+          </span>
+        </Link>
 
-          {/* Right side items */}
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
-
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden relative w-8 h-8 flex items-center justify-center text-gray-700 dark:text-gray-300"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              <div className="w-6 h-5 relative flex flex-col justify-center">
-                <span
-                  className={`absolute h-0.5 w-6 bg-current transition-all duration-300 ${
-                    isOpen ? 'top-2 rotate-45' : 'top-0'
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-1">
+          <div className="flex items-center gap-1 px-4 py-2 rounded-full bg-white/5 border border-white/5 backdrop-blur-sm mr-4">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`relative px-4 py-1.5 text-sm font-medium transition-colors ${
+                    isActive ? 'text-white' : 'text-slate-400 hover:text-white'
                   }`}
-                />
-                <span
-                  className={`absolute h-0.5 w-6 bg-current transition-all duration-300 ${
-                    isOpen ? 'opacity-0' : 'opacity-100 top-2'
-                  }`}
-                />
-                <span
-                  className={`absolute h-0.5 w-6 bg-current transition-all duration-300 ${
-                    isOpen ? 'top-2 -rotate-45' : 'top-4'
-                  }`}
-                />
-              </div>
-            </button>
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="desktop-nav"
+                      className="absolute inset-0 bg-white/10 rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.name}</span>
+                </Link>
+              )
+            })}
           </div>
+          
+          <ThemeToggle />
         </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="py-4 space-y-1">
-                {navigation.map((item, index) => (
-                  <motion.button
-                    key={item.name}
+        {/* Mobile Toggle Button */}
+        <div className="lg:hidden flex items-center gap-4">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden overflow-hidden bg-[#020202]/95 backdrop-blur-xl border-b border-white/10"
+          >
+            <div className="container-custom py-8 flex flex-col gap-2">
+              {navLinks.map((link, idx) => {
+                const isActive = location.pathname === link.path
+                return (
+                  <motion.div
+                    key={link.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ delay: index * 0.05 }}
-                    onClick={() => handleNavClick(item.href)}
-                    className={`block w-full text-left px-3 py-2 text-base font-medium rounded-lg transition-colors duration-200 ${
-                      isActive(item.href)
-                        ? 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`}
+                    transition={{ delay: idx * 0.05 }}
                   >
-                    {item.name}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                    <Link
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block px-6 py-4 rounded-xl text-lg font-medium border border-transparent transition-all ${
+                        isActive 
+                          ? 'bg-white/10 text-white border-white/10' 
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }

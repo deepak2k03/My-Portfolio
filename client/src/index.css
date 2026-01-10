@@ -81,3 +81,28 @@
     scroll-behavior: smooth;
   }
 }
+
+/* 1. Stop the default cross-fade animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* 2. Ensure the new theme sits on top while animating */
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* 3. Smooth background transition for elements that don't use the circle effect */
+html {
+  transition: background-color 0.5s ease;
+}
+
+html.dark body {
+  background-color: #020202; /* OLED Black */
+}
+
+html.light body {
+  background-color: #ffffff;
+}

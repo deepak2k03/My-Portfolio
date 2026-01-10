@@ -1,15 +1,18 @@
+// server/src/server.js
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
-import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 
-// Import routes
+// 🔹 Make sure this path & name matches your actual file name
+// If your file is `server/src/routes/interviews.js`, this is correct:
 import interviewsRouter from './routes/interviews.js'
-import contactRouter from './routes/contact.js'
 
-// Load environment variables
-dotenv.config()
+// If your file is `interviewRoutes.js`, change to:
+// import interviewsRouter from './routes/interviewRoutes.js'
+
+import contactRouter from './routes/contact.js'
 
 // Connect to database
 connectDB()
@@ -26,7 +29,7 @@ app.use(helmet({
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
       scriptSrc: ["'self'"],
-      connectSrc: ["'self'"],
+      connectSrc: ["'self'", process.env.CLIENT_URL || 'http://localhost:3000'],
     },
   },
   crossOriginEmbedderPolicy: false
@@ -46,7 +49,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
 // Request logging middleware
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - ${new Date().toISOString()}`)
+  console.log(`${req.method} ${req.originalUrl} - ${new Date().toISOString()}`)
   next()
 })
 
@@ -60,12 +63,13 @@ app.get('/api/health', (req, res) => {
   })
 })
 
-// API routes
-app.use('/api/interviews', interviewsRouter)
+// 🔹 API routes (MOUNTED BEFORE 404)
+app.use('/api/interviews', interviewsRouter)  // ⬅ POST /api/interviews should hit router.post('/')
 app.use('/api/contact', contactRouter)
 
 // 404 handler for API routes
 app.all('/api/*', (req, res) => {
+  console.log('❌ 404 reached for:', req.method, req.originalUrl)
   res.status(404).json({
     success: false,
     error: 'API endpoint not found'
@@ -74,7 +78,7 @@ app.all('/api/*', (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Error:', err.stack)
+  console.error('Error middleware:', err.stack)
 
   // Mongoose validation error
   if (err.name === 'ValidationError') {
@@ -119,7 +123,6 @@ app.listen(PORT, () => {
   console.log(`🔗 API URL: http://localhost:${PORT}/api`)
 })
 
-// Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM received, shutting down gracefully')
   process.exit(0)
