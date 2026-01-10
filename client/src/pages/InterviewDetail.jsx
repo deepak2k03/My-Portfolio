@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { interviewsAPI } from "../utils/api";
+import { interviewsAPI } from "../utils/api.js";
 import {
   ArrowLeft,
   Calendar,
