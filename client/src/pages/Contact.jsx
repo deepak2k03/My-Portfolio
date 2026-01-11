@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import emailjs from '@emailjs/browser' // 🟢 ADDED THIS IMPORT
 import SectionHeader from '../components/common/SectionHeader'
-import { Send, Mail, MapPin, CheckCircle2, ArrowRight, Github, Linkedin, Twitter, Loader2, User, Type, MessageSquare, Terminal } from 'lucide-react'
+import { Send, Mail, MapPin, CheckCircle2, User, Type, MessageSquare, Terminal, Github, Linkedin, Twitter, Loader2 } from 'lucide-react'
 
-// --- 1. 3D Tilt Physics Engine (Reused for consistency) ---
+// --- 1. 3D Tilt Physics Engine (Unchanged) ---
 const TiltCard = ({ children, className = "" }) => {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -47,24 +48,21 @@ const TiltCard = ({ children, className = "" }) => {
   )
 }
 
-// --- 2. Sci-Fi Input Field ---
+// --- 2. Input Field (Unchanged) ---
 const InputField = ({ label, id, type = "text", register, validation, error, placeholder, isTextArea = false, icon: Icon }) => (
   <div className="space-y-2 group">
     <label htmlFor={id} className="text-xs font-bold text-slate-500 uppercase tracking-widest group-focus-within:text-purple-600 dark:group-focus-within:text-purple-400 transition-colors flex items-center gap-2">
       {Icon && <Icon size={12} />} {label}
     </label>
     <div className="relative overflow-hidden rounded-xl">
-      {/* 🟢 FIX: Adaptive Background & Border */}
       <div className="absolute inset-0 bg-white dark:bg-[#0F0F0F] border border-slate-200 dark:border-white/10 rounded-xl transition-colors group-focus-within:border-purple-500/50 group-focus-within:bg-slate-50 dark:group-focus-within:bg-white/5" />
       
-      {/* The Actual Input */}
       {isTextArea ? (
         <textarea
           id={id}
           rows={4}
           {...register(id, validation)}
           placeholder={placeholder}
-          // 🟢 FIX: Adaptive Text Colors
           className="relative w-full bg-transparent px-4 py-4 text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none transition-all resize-none z-10"
         />
       ) : (
@@ -73,12 +71,10 @@ const InputField = ({ label, id, type = "text", register, validation, error, pla
           type={type}
           {...register(id, validation)}
           placeholder={placeholder}
-          // 🟢 FIX: Adaptive Text Colors
           className="relative w-full bg-transparent px-4 py-4 text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none transition-all z-10"
         />
       )}
 
-      {/* Laser Scanline Effect on Focus */}
       <div className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-transparent via-purple-500 to-transparent translate-x-[-100%] group-focus-within:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
     </div>
 
@@ -98,32 +94,49 @@ const InputField = ({ label, id, type = "text", register, validation, error, pla
   </div>
 )
 
+// --- 3. MAIN COMPONENT (UPDATED) ---
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSent, setIsSent] = useState(false)
   
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     setIsSubmitting(true)
+    
+    // 🟢 EMAILJS LOGIC STARTS HERE
+    const serviceId = "service_zc1novv";     // 🔴 PASTE YOUR SERVICE ID HERE
+    const templateId = "template_skjx21r";   // 🔴 PASTE YOUR TEMPLATE ID HERE
+    const publicKey = "4u9_2cOujN3lPSQXl";     // 🔴 PASTE YOUR PUBLIC KEY HERE
+
+    // Create an object that matches your EmailJS template variables
+    const templateParams = {
+      name: data.name,       // Matches {{name}}
+      email: data.email,     // Matches {{email}}
+      message: data.message, // Matches {{message}}
+      subject: data.subject  // Just in case you add {{subject}} later
+    };
+
     try {
-      // Simulate network request
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      // Success handling
       setIsSent(true)
       toast.success("Transmission Received!")
       reset()
+      
     } catch (error) {
-      toast.error('Transmission Failed.')
+      console.error("FAILED...", error);
+      toast.error('Transmission Failed. Check console for details.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    // 🟢 FIX: Main background
     <div className="min-h-screen bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-50 py-24 relative overflow-hidden transition-colors duration-300">
       
-      {/* 1. Global Atmosphere */}
+      {/* Background Effects */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/10 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 dark:bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
@@ -164,7 +177,6 @@ const Contact = () => {
              
              {/* Info Cards */}
              <div className="space-y-4">
-               {/* 🟢 FIX: Card Backgrounds */}
                <a href="mailto:contact@deepak.dev" className="group flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 hover:border-purple-400 dark:hover:border-purple-500/30 hover:shadow-lg dark:hover:bg-white/10 transition-all">
                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-[#0A0A0A] text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform border border-slate-200 dark:border-white/5">
                    <Mail size={20} />
@@ -186,7 +198,7 @@ const Contact = () => {
                </div>
              </div>
 
-             {/* Social Inventory Grid */}
+             {/* Social Grid */}
              <div>
                 <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-4">Social Uplinks</p>
                 <div className="grid grid-cols-3 gap-3">
@@ -200,7 +212,6 @@ const Contact = () => {
                       href={social.href}
                       target="_blank" 
                       rel="noreferrer"
-                      // 🟢 FIX: Social Buttons
                       className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-[#0A0A0A] border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 hover:shadow-md dark:hover:bg-white/5 transition-all group"
                     >
                       <social.icon className={`w-5 h-5 ${social.color} mb-2 group-hover:scale-110 transition-transform`} />
@@ -211,7 +222,7 @@ const Contact = () => {
              </div>
           </motion.div>
 
-          {/* --- RIGHT SIDE: 3D TRANSMISSION FORM --- */}
+          {/* --- RIGHT SIDE: FORM --- */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -219,21 +230,13 @@ const Contact = () => {
             className="lg:col-span-7"
           >
             <TiltCard>
-              {/* 🟢 FIX: Form Outer Container */}
               <div className="relative rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A0A0A] p-1 shadow-2xl dark:shadow-black/50">
-                
-                {/* Glossy Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-slate-50/50 dark:from-white/5 to-transparent pointer-events-none rounded-3xl" />
-
-                {/* 🟢 FIX: Form Inner Container */}
                 <div className="bg-slate-50 dark:bg-[#050505] rounded-[1.4rem] p-8 md:p-10 relative overflow-hidden">
-                  
-                  {/* Subtle Grid Background inside form */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
                   <AnimatePresence mode="wait">
                     {!isSent ? (
-                      /* --- FORM STATE --- */
                       <motion.form 
                         key="contact-form"
                         initial={{ opacity: 0 }}
@@ -298,9 +301,6 @@ const Contact = () => {
                           disabled={isSubmitting}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          // 🟢 FIX: Button Style (Dark text in dark mode, light text in light mode? No, better to invert)
-                          // In Light Mode: Dark Button (slate-900)
-                          // In Dark Mode: Light Button (white)
                           className="w-full py-4 mt-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-black font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
                         >
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-500" />
@@ -316,7 +316,6 @@ const Contact = () => {
                         </motion.button>
                       </motion.form>
                     ) : (
-                      /* --- SUCCESS STATE --- */
                       <motion.div
                         key="success-message"
                         initial={{ opacity: 0, scale: 0.9 }}
