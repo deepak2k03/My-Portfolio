@@ -1,71 +1,46 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-const SectionHeader = ({ 
-  title, 
-  subtitle, 
-  tag, // New prop for the small pill badge (e.g., "Explore", "My Work")
-  centered = false,
-  className = "" 
-}) => {
-  
+const SectionHeader = ({ title, subtitle, tag, centered = false }) => {
   return (
-    <div className={`relative mb-16 ${centered ? 'text-center flex flex-col items-center' : ''} ${className}`}>
-      
-      {/* 1. Optional Tag/Badge */}
+    <div className={`mb-12 ${centered ? "text-center" : "text-left"}`}>
+      {/* Tag */}
       {tag && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="inline-flex items-center justify-center px-3 py-1 mb-4 border border-purple-500/30 rounded-full bg-purple-500/10 backdrop-blur-sm"
+          // 🟢 FIX: Light purple bg for light mode, dark for dark mode
+          className="inline-block py-1 px-3 rounded-full bg-purple-100 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 text-purple-600 dark:text-purple-400 text-xs font-bold uppercase tracking-wider mb-4"
         >
-          <span className="text-xs font-semibold text-purple-300 tracking-wide uppercase">
-            {tag}
-          </span>
-        </motion.div>
+          {tag}
+        </motion.span>
       )}
 
-      {/* 2. Main Title with Gradient Effect */}
+      {/* Title */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6"
+        transition={{ delay: 0.1 }}
+        // 🟢 FIX: text-slate-900 (Dark) for Light Mode, text-white for Dark Mode
+        className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight mb-4"
       >
-        {/* If you want a gradient on the text, use this class structure: */}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
-          {title}
-        </span>
+        {title}
       </motion.h2>
 
-      {/* 3. Subtitle with improved readability */}
+      {/* Subtitle */}
       {subtitle && (
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className={`text-lg text-slate-400 leading-relaxed max-w-2xl ${
-            centered ? 'mx-auto' : ''
-          }`}
+          transition={{ delay: 0.2 }}
+          // 🟢 FIX: Darker gray for light mode visibility
+          className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed"
         >
           {subtitle}
         </motion.p>
       )}
-
-      {/* 4. Decorative Gradient Line (Visual Anchor) */}
-      <motion.div
-        initial={{ width: 0, opacity: 0 }}
-        whileInView={{ width: "100px", opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className={`h-1 mt-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 ${
-          centered ? 'mx-auto' : ''
-        }`}
-      />
-      
     </div>
   );
 };

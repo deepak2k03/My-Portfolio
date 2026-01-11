@@ -21,14 +21,15 @@ const DifficultyMeter = ({ level }) => {
       {[1, 2, 3].map((bar) => (
         <div 
           key={bar} 
+          // 🟢 FIX: Empty bars are now visible in light mode
           className={`w-1.5 h-4 rounded-sm transition-colors ${
             bar <= score 
               ? score === 3 ? 'bg-red-500' : score === 2 ? 'bg-yellow-500' : 'bg-green-500'
-              : 'bg-white/10'
+              : 'bg-slate-200 dark:bg-white/10'
           }`} 
         />
       ))}
-      <span className="ml-2 text-xs font-mono text-slate-400 uppercase">{level}</span>
+      <span className="ml-2 text-xs font-mono text-slate-500 dark:text-slate-400 uppercase">{level}</span>
     </div>
   )
 }
@@ -70,12 +71,13 @@ const Interviews = () => {
   }, [interviews, search])
 
   return (
-    <div className="min-h-screen bg-[#020202] text-slate-50 py-24 relative overflow-hidden">
+    // 🟢 FIX: Main Background & Text Color
+    <div className="min-h-screen bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-50 py-24 relative overflow-hidden transition-colors duration-300">
       
-      {/* 1. Background Atmosphere (Matches Home/Contact) */}
+      {/* 1. Background Atmosphere */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/10 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 dark:bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
@@ -96,17 +98,18 @@ const Interviews = () => {
             className="relative w-full max-w-lg mt-8 group"
           >
             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+              <Search className="w-5 h-5 text-slate-400 group-focus-within:text-purple-600 dark:group-focus-within:text-purple-400 transition-colors" />
             </div>
+            {/* 🟢 FIX: Search Input Colors */}
             <input 
               type="text" 
               placeholder="Search by company, role, or stack..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:bg-white/10 focus:border-purple-500/50 transition-all shadow-xl shadow-black/20"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-purple-500/50 focus:shadow-lg transition-all shadow-sm dark:shadow-black/20"
             />
             <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-              <div className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] text-slate-500 font-mono">
+              <div className="px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] text-slate-500 font-mono">
                 CMD+K
               </div>
             </div>
@@ -116,14 +119,14 @@ const Interviews = () => {
         {/* Loading State */}
         {loading && (
           <div className="flex flex-col items-center justify-center py-20 text-slate-500 gap-4">
-            <Loader2 className="w-10 h-10 animate-spin text-purple-500" />
+            <Loader2 className="w-10 h-10 animate-spin text-purple-600 dark:text-purple-500" />
             <p className="font-mono text-sm animate-pulse">Decrypting Archives...</p>
           </div>
         )}
 
         {/* Error State */}
         {error && (
-          <div className="flex flex-col items-center justify-center py-20 text-red-400 gap-4">
+          <div className="flex flex-col items-center justify-center py-20 text-red-500 dark:text-red-400 gap-4">
             <AlertCircle className="w-10 h-10" />
             <p>{error}</p>
           </div>
@@ -132,10 +135,10 @@ const Interviews = () => {
         {/* Empty State */}
         {!loading && !error && filteredInterviews.length === 0 && (
           <div className="text-center py-20">
-             <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Filter className="w-6 h-6 text-slate-600" />
+             <div className="w-16 h-16 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Filter className="w-6 h-6 text-slate-500 dark:text-slate-600" />
              </div>
-             <p className="text-slate-400">No logs found matching your criteria.</p>
+             <p className="text-slate-500 dark:text-slate-400">No logs found matching your criteria.</p>
           </div>
         )}
 
@@ -158,54 +161,56 @@ const Interviews = () => {
                   className="group relative cursor-pointer"
                 >
                   {/* Card Container */}
-                  <div className="h-full rounded-3xl bg-[#0A0A0A]/50 border border-white/10 p-1 hover:border-purple-500/30 hover:bg-white/5 transition-all duration-300">
+                  {/* 🟢 FIX: Card Colors */}
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#0A0A0A]/50 border border-slate-200 dark:border-white/10 p-1 hover:border-purple-400 dark:hover:border-purple-500/30 hover:shadow-md dark:hover:bg-white/5 transition-all duration-300">
                     
-                    <div className="relative h-full rounded-[1.3rem] bg-[#0F0F0F] p-6 overflow-hidden">
+                    {/* 🟢 FIX: Inner Card Background */}
+                    <div className="relative h-full rounded-[1.3rem] bg-slate-50 dark:bg-[#0F0F0F] p-6 overflow-hidden">
                       
                       {/* Top Row: Meta */}
                       <div className="flex justify-between items-start mb-6">
-                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 group-hover:scale-110 group-hover:text-white transition-all">
-                               <Building2 size={20} />
-                            </div>
-                            <div>
-                               <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-purple-300 transition-colors">
-                                  {interview.company}
-                               </h3>
-                               <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
-                                  <Briefcase size={12} />
-                                  <span>{interview.role}</span>
-                               </div>
-                            </div>
-                         </div>
+                          <div className="flex items-center gap-3">
+                             <div className="w-12 h-12 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 dark:text-slate-300 group-hover:scale-110 group-hover:text-purple-600 dark:group-hover:text-white transition-all shadow-sm dark:shadow-none">
+                                <Building2 size={20} />
+                             </div>
+                             <div>
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
+                                   {interview.company}
+                                </h3>
+                                <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
+                                   <Briefcase size={12} />
+                                   <span>{interview.role}</span>
+                                </div>
+                             </div>
+                          </div>
 
-                         {/* Date Badge */}
-                         {interview.date && (
-                           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-[10px] font-mono text-slate-400">
-                              <Calendar size={10} />
-                              <span>{new Date(interview.date).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }).toUpperCase()}</span>
-                           </div>
-                         )}
+                          {/* Date Badge */}
+                          {interview.date && (
+                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 text-[10px] font-mono text-slate-500 dark:text-slate-400 shadow-sm dark:shadow-none">
+                               <Calendar size={10} />
+                               <span>{new Date(interview.date).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }).toUpperCase()}</span>
+                            </div>
+                          )}
                       </div>
 
                       {/* Content Preview */}
                       <div className="mb-6">
-                        <p className="text-sm text-slate-400 leading-relaxed line-clamp-2">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
                            {interview.previewText || interview.detailedWriteup?.preparation || "No preview available for this experience."}
                         </p>
                       </div>
 
                       {/* Footer: Tags & Difficulty */}
-                      <div className="flex items-end justify-between mt-auto border-t border-white/5 pt-4">
-                         
-                         <div className="flex flex-col gap-3">
+                      <div className="flex items-end justify-between mt-auto border-t border-slate-200 dark:border-white/5 pt-4">
+                          
+                          <div className="flex flex-col gap-3">
                             {/* Difficulty Visualizer */}
                             <DifficultyMeter level={interview.difficulty} />
                             
                             {/* Tags */}
                             <div className="flex flex-wrap gap-2">
                                {interview.tags?.slice(0, 3).map((tag, i) => (
-                                  <span key={i} className="text-[10px] px-2 py-1 rounded bg-slate-800/50 text-slate-400 border border-white/5">
+                                  <span key={i} className="text-[10px] px-2 py-1 rounded bg-slate-200/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/5">
                                      #{tag}
                                   </span>
                                ))}
@@ -213,12 +218,12 @@ const Interviews = () => {
                                   <span className="text-[10px] px-2 py-1 text-slate-500">+{interview.tags.length - 3}</span>
                                )}
                             </div>
-                         </div>
+                          </div>
 
-                         {/* Action Arrow */}
-                         <div className="p-2 rounded-full bg-white/5 text-slate-400 group-hover:bg-purple-500 group-hover:text-white transition-all transform group-hover:-rotate-45">
-                            <ArrowUpRight size={18} />
-                         </div>
+                          {/* Action Arrow */}
+                          <div className="p-2 rounded-full bg-slate-200 dark:bg-white/5 text-slate-500 dark:text-slate-400 group-hover:bg-purple-600 dark:group-hover:bg-purple-500 group-hover:text-white transition-all transform group-hover:-rotate-45">
+                             <ArrowUpRight size={18} />
+                          </div>
 
                       </div>
                     </div>

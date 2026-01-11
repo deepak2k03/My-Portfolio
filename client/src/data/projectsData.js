@@ -1,9 +1,8 @@
 export const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
-    longDescription: "A comprehensive e-commerce platform built with MERN stack. Features include user authentication, product catalog, shopping cart, secure payment processing with Stripe, order tracking, and admin panel for inventory and order management. The application handles thousands of products and provides smooth user experience with real-time updates.",
+    title: "PublicEye",
+    description: "A web-based platform that tracks and displays government contracts, permits, and approvals in real time using blockchain technology.",
     image: "/projects/ecommerce.jpg",
     techStack: ["React", "Node.js", "MongoDB", "Express", "Stripe", "JWT", "Tailwind CSS"],
     liveDemo: "https://ecommerce-demo.com",
@@ -162,4 +161,8 @@ export const getFeaturedProjects = () => {
 
 export const getAllCategories = () => {
   return ['All', ...new Set(projects.map(project => project.category))]
+}
+
+export const getProjectById = (id) => {
+  return projects.find(project => project.id == id);
 }

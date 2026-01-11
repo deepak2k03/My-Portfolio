@@ -1,25 +1,49 @@
+import { useEffect, useState } from 'react'
+import { Moon, Sun } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { Sun, Moon } from 'lucide-react'
-import { useTheme } from '../../context/ThemeContext'
 
 const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme()
+  // 1. Initialize state from localStorage or system preference
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem('theme')) {
+        return localStorage.getItem('theme')
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+      }
+    }
+    return 'light'
+  })
+
+  // 2. Apply the theme to the HTML tag whenever state changes
+  useEffect(() => {
+    const root = window.document.documentElement
+    
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+  }
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      // 👇 CRITICAL: You MUST pass 'e' here for the circular animation to work
-      onClick={(e) => toggleTheme(e)}
-      className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors relative overflow-hidden group"
       aria-label="Toggle Theme"
     >
-      {theme === 'dark' ? (
-        <Sun size={20} className="text-yellow-400" />
-      ) : (
-        <Moon size={20} className="text-purple-400" />
-      )}
-    </motion.button>
+      <div className="relative z-10">
+        {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+      </div>
+    </button>
   )
 }
 

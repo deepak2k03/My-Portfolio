@@ -43,16 +43,15 @@ const HeroSection = () => {
             Available for Freelance & Hires
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1] mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 dark:text-white leading-[1.1] mb-6">
             Building digital <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
               obsessions.
             </span>
           </h1>
 
-          <p className="text-lg text-slate-400 leading-relaxed max-w-xl mb-8">
-            I'm <span className="text-white font-semibold">Deepak Singh</span>, a Full-Stack MERN Developer. 
-            I architect scalable systems and craft pixel-perfect UI that users actually enjoy using.
+          <p className="text-lg text-slate-800 dark:text-white leading-relaxed max-w-xl mb-8">
+            I'm <span className="text-blue-500 font-semibold">Deepak Singh</span>, I am a Final-year B.Tech student at KNIT, Sultanpur, specializing in Information Technology. With a strong foundation in Data Structures, Algorithms and web development, I am passionate about competitive programming and continuously seek out challenges to enhance my skills.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -66,7 +65,7 @@ const HeroSection = () => {
             </Link>
             
             <a 
-              href="/resume.pdf" 
+              href="https://drive.google.com/file/d/1WIST7E8u9AiI9jWWXNtB6YhsF1ylD0RS/view?usp=sharing" 
               className="px-8 py-4 bg-white/5 text-white font-medium rounded-full border border-white/10 hover:bg-white/10 transition-all flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
@@ -76,9 +75,9 @@ const HeroSection = () => {
 
           {/* Social Proof / Mini Icons */}
           <div className="mt-12 flex items-center gap-6 text-slate-500">
-             <a href="#" className="hover:text-white transition-colors"><Github size={20} /></a>
-             <a href="#" className="hover:text-white transition-colors"><Linkedin size={20} /></a>
-             <a href="#" className="hover:text-white transition-colors"><Mail size={20} /></a>
+             <a href="https://github.com/deepak2k03" className="hover:text-white transition-colors"><Github size={20} /></a>
+             <a href="https://www.linkedin.com/in/deepak-singh-1b8590257/" className="hover:text-white transition-colors"><Linkedin size={20} /></a>
+             <a href="mailto:sman59472@gmail.com" className="hover:text-white transition-colors"><Mail size={20} /></a>
              <div className="h-1 w-1 bg-slate-700 rounded-full" />
              <span className="text-sm">Based in India</span>
           </div>
