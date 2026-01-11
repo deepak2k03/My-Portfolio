@@ -191,9 +191,9 @@ const Contact = () => {
                 <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-4">Social Uplinks</p>
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { icon: Github, label: "GitHub", href: "https://github.com", color: "text-slate-900 dark:text-white" },
-                    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com", color: "text-blue-600 dark:text-blue-400" },
-                    { icon: Twitter, label: "Twitter", href: "https://twitter.com", color: "text-cyan-500 dark:text-cyan-400" },
+                    { icon: Github, label: "GitHub", href: "https://github.com/deepak2k03", color: "text-slate-900 dark:text-white" },
+                    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/deepak-singh-1b8590257/", color: "text-blue-600 dark:text-blue-400" },
+                    { icon: Twitter, label: "Twitter", href: "https://x.com/deepak2k03", color: "text-cyan-500 dark:text-cyan-400" },
                   ].map((social, idx) => (
                     <a 
                       key={idx}
