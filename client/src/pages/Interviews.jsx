@@ -1,35 +1,74 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from 'framer-motion'
 import SectionHeader from '../components/common/SectionHeader'
 import { interviewsAPI } from '../utils/api'
-import { Calendar, Building2, Briefcase, Search, ArrowUpRight, Signal, Filter, Loader2, AlertCircle } from 'lucide-react'
+import { 
+  Calendar, Building2, Briefcase, Search, ArrowUpRight, 
+  Filter, Loader2, AlertCircle, Terminal, Zap, Hash 
+} from 'lucide-react'
 
-// --- Difficulty Visualizer Component ---
-const DifficultyMeter = ({ level }) => {
-  const getLevel = () => {
-    const l = level?.toLowerCase() || 'medium'
-    if (l.includes('easy')) return 1
-    if (l.includes('hard')) return 3
-    return 2 // medium
+// --- 1. The Holographic Spotlight Card ---
+// This component tracks mouse position to create a "flashlight" reveal effect
+const SpotlightCard = ({ children, onClick, delay }) => {
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect()
+    mouseX.set(clientX - left)
+    mouseY.set(clientY - top)
   }
-  
-  const score = getLevel()
-  
+
   return (
-    <div className="flex items-center gap-1" title={`Difficulty: ${level}`}>
-      {[1, 2, 3].map((bar) => (
-        <div 
-          key={bar} 
-          // 🟢 FIX: Empty bars are now visible in light mode
-          className={`w-1.5 h-4 rounded-sm transition-colors ${
-            bar <= score 
-              ? score === 3 ? 'bg-red-500' : score === 2 ? 'bg-yellow-500' : 'bg-green-500'
-              : 'bg-slate-200 dark:bg-white/10'
-          }`} 
-        />
-      ))}
-      <span className="ml-2 text-xs font-mono text-slate-500 dark:text-slate-400 uppercase">{level}</span>
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, delay: delay }}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      className="group relative border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/50 rounded-3xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500"
+    >
+      {/* The Spotlight Gradient Layer */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-10"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(147, 51, 234, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+      {/* Inner Content */}
+      <div className="relative h-full p-6 z-20 flex flex-col">{children}</div>
+    </motion.div>
+  )
+}
+
+// --- 2. Neon Difficulty Badge ---
+const DifficultyBadge = ({ level }) => {
+  const getLevelColor = () => {
+    const l = level?.toLowerCase() || 'medium'
+    if (l.includes('easy')) return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+    if (l.includes('hard')) return 'bg-rose-500/10 text-rose-500 border-rose-500/20'
+    return 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+  }
+
+  const getIcon = () => {
+      const l = level?.toLowerCase() || 'medium'
+      if (l.includes('hard')) return <Zap size={10} fill="currentColor" />
+      return <div className={`w-1.5 h-1.5 rounded-full ${l.includes('easy') ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+  }
+
+  return (
+    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-widest ${getLevelColor()}`}>
+       {getIcon()}
+       {level}
     </div>
   )
 }
@@ -50,7 +89,7 @@ const Interviews = () => {
         setInterviews(res.data?.interviews || [])
       } catch (err) {
         console.error('[Interviews] fetch error:', err)
-        setError('Unable to decrypt interview archives.')
+        setError('Unable to access the secure archives.')
       } finally {
         setLoading(false)
       }
@@ -58,7 +97,6 @@ const Interviews = () => {
     fetchInterviews()
   }, [])
 
-  // Filter Logic
   const filteredInterviews = useMemo(() => {
     return interviews.filter(item => {
       const query = search.toLowerCase()
@@ -71,168 +109,144 @@ const Interviews = () => {
   }, [interviews, search])
 
   return (
-    // 🟢 FIX: Main Background & Text Color
-    <div className="min-h-screen bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-50 py-24 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020202] text-slate-900 dark:text-slate-50 py-24 relative overflow-hidden transition-colors duration-300 font-sans">
       
-      {/* 1. Background Atmosphere */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/10 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 dark:bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Matrix */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="fixed top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 max-w-7xl mx-auto px-4">
         
-        {/* Header & Search Area */}
-        <div className="flex flex-col items-center justify-center mb-16">
-          <SectionHeader
-            tag="Archives"
-            title="Interview Logs"
-            subtitle="Declassified experiences, system design discussions, and coding rounds."
-            centered
-          />
-          
-          {/* Glass Search Bar */}
+        {/* --- HEADER --- */}
+        <div className="flex flex-col items-center text-center mb-16">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="relative w-full max-w-lg mt-8 group"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 text-xs font-mono mb-6"
           >
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-slate-400 group-focus-within:text-purple-600 dark:group-focus-within:text-purple-400 transition-colors" />
-            </div>
-            {/* 🟢 FIX: Search Input Colors */}
-            <input 
-              type="text" 
-              placeholder="Search by company, role, or stack..." 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-purple-500/50 focus:shadow-lg transition-all shadow-sm dark:shadow-black/20"
-            />
-            <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-              <div className="px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] text-slate-500 font-mono">
-                CMD+K
-              </div>
-            </div>
+             <Terminal size={12} />
+             <span>ENCRYPTED ARCHIVES_V2</span>
           </motion.div>
+          
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white mb-6">
+             Interview <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">Logs.</span>
+          </h1>
+          <p className="max-w-xl mx-auto text-lg text-slate-600 dark:text-slate-400">
+             A collection of declassified experiences, system design battles, and algorithmic conquests.
+          </p>
         </div>
 
-        {/* Loading State */}
+        {/* --- FLOATING COMMAND BAR --- */}
+        <div className="sticky top-6 z-40 mb-12 flex justify-center">
+           <motion.div 
+             initial={{ scale: 0.9, opacity: 0 }}
+             animate={{ scale: 1, opacity: 1 }}
+             className="w-full max-w-xl p-2 rounded-2xl bg-white/80 dark:bg-[#111]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-2xl shadow-purple-500/10 flex items-center gap-3"
+           >
+              <div className="p-3 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-400">
+                 <Search size={20} />
+              </div>
+              <input 
+                type="text" 
+                placeholder="Search logs (e.g. 'Google', 'System Design')..." 
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder:text-slate-400"
+              />
+              <div className="hidden md:flex items-center gap-1 pr-3">
+                 <kbd className="px-2 py-1 rounded bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-500 font-mono">CMD</kbd>
+                 <kbd className="px-2 py-1 rounded bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-500 font-mono">K</kbd>
+              </div>
+           </motion.div>
+        </div>
+
+        {/* --- LOADING & ERROR STATES --- */}
         {loading && (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-500 gap-4">
-            <Loader2 className="w-10 h-10 animate-spin text-purple-600 dark:text-purple-500" />
-            <p className="font-mono text-sm animate-pulse">Decrypting Archives...</p>
+          <div className="flex flex-col items-center justify-center py-20 gap-4">
+            <Loader2 className="w-10 h-10 animate-spin text-purple-500" />
+            <span className="text-sm font-mono text-slate-500 animate-pulse">Decrypting data streams...</span>
           </div>
         )}
-
-        {/* Error State */}
-        {error && (
-          <div className="flex flex-col items-center justify-center py-20 text-red-500 dark:text-red-400 gap-4">
-            <AlertCircle className="w-10 h-10" />
-            <p>{error}</p>
-          </div>
-        )}
-
-        {/* Empty State */}
+        
         {!loading && !error && filteredInterviews.length === 0 && (
-          <div className="text-center py-20">
-             <div className="w-16 h-16 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Filter className="w-6 h-6 text-slate-500 dark:text-slate-600" />
-             </div>
-             <p className="text-slate-500 dark:text-slate-400">No logs found matching your criteria.</p>
+          <div className="text-center py-24 opacity-50">
+             <Filter className="w-12 h-12 mx-auto mb-4 text-slate-400" />
+             <p className="text-slate-500">No matching archives found.</p>
           </div>
         )}
 
-        {/* --- THE DOSSIER GRID --- */}
+        {/* --- THE HOLOGRAPHIC GRID --- */}
         {!loading && filteredInterviews.length > 0 && (
-          <motion.div 
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
               {filteredInterviews.map((interview, index) => (
-                <motion.div
-                  layout
-                  key={interview._id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                <SpotlightCard 
+                  key={interview._id} 
                   onClick={() => navigate(`/interviews/${interview._id}`)}
-                  className="group relative cursor-pointer"
+                  delay={index * 0.05} // Staggered entrance
                 >
-                  {/* Card Container */}
-                  {/* 🟢 FIX: Card Colors */}
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#0A0A0A]/50 border border-slate-200 dark:border-white/10 p-1 hover:border-purple-400 dark:hover:border-purple-500/30 hover:shadow-md dark:hover:bg-white/5 transition-all duration-300">
-                    
-                    {/* 🟢 FIX: Inner Card Background */}
-                    <div className="relative h-full rounded-[1.3rem] bg-slate-50 dark:bg-[#0F0F0F] p-6 overflow-hidden">
-                      
-                      {/* Top Row: Meta */}
-                      <div className="flex justify-between items-start mb-6">
-                          <div className="flex items-center gap-3">
-                             <div className="w-12 h-12 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 dark:text-slate-300 group-hover:scale-110 group-hover:text-purple-600 dark:group-hover:text-white transition-all shadow-sm dark:shadow-none">
-                                <Building2 size={20} />
-                             </div>
-                             <div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
-                                   {interview.company}
+                    {/* Header: Company & Date */}
+                    <div className="flex justify-between items-start mb-6">
+                        <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 dark:text-slate-300 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <Building2 size={22} />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-none mb-1 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                    {interview.company}
                                 </h3>
-                                <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
-                                   <Briefcase size={12} />
-                                   <span>{interview.role}</span>
+                                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                                    <Briefcase size={10} />
+                                    <span>{interview.role}</span>
                                 </div>
-                             </div>
-                          </div>
-
-                          {/* Date Badge */}
-                          {interview.date && (
-                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 text-[10px] font-mono text-slate-500 dark:text-slate-400 shadow-sm dark:shadow-none">
-                               <Calendar size={10} />
-                               <span>{new Date(interview.date).toLocaleDateString(undefined, { month: 'short', year: 'numeric' }).toUpperCase()}</span>
                             </div>
-                          )}
-                      </div>
-
-                      {/* Content Preview */}
-                      <div className="mb-6">
-                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
-                           {interview.previewText || interview.detailedWriteup?.preparation || "No preview available for this experience."}
-                        </p>
-                      </div>
-
-                      {/* Footer: Tags & Difficulty */}
-                      <div className="flex items-end justify-between mt-auto border-t border-slate-200 dark:border-white/5 pt-4">
-                          
-                          <div className="flex flex-col gap-3">
-                            {/* Difficulty Visualizer */}
-                            <DifficultyMeter level={interview.difficulty} />
-                            
-                            {/* Tags */}
-                            <div className="flex flex-wrap gap-2">
-                               {interview.tags?.slice(0, 3).map((tag, i) => (
-                                  <span key={i} className="text-[10px] px-2 py-1 rounded bg-slate-200/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/5">
-                                     #{tag}
-                                  </span>
-                               ))}
-                               {interview.tags?.length > 3 && (
-                                  <span className="text-[10px] px-2 py-1 text-slate-500">+{interview.tags.length - 3}</span>
-                               )}
-                            </div>
-                          </div>
-
-                          {/* Action Arrow */}
-                          <div className="p-2 rounded-full bg-slate-200 dark:bg-white/5 text-slate-500 dark:text-slate-400 group-hover:bg-purple-600 dark:group-hover:bg-purple-500 group-hover:text-white transition-all transform group-hover:-rotate-45">
-                             <ArrowUpRight size={18} />
-                          </div>
-
-                      </div>
+                        </div>
+                        {interview.date && (
+                            <span className="px-2 py-1 rounded-md bg-slate-100 dark:bg-white/5 text-[10px] font-mono font-bold text-slate-500 uppercase">
+                                {new Date(interview.date).toLocaleDateString(undefined, { month: 'short', year: '2-digit' })}
+                            </span>
+                        )}
                     </div>
-                  </div>
-                </motion.div>
+
+                    {/* Body: Preview Text */}
+                    <div className="flex-1 mb-6">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                            {interview.previewText || interview.detailedWriteup?.preparation || "Access encrypted log details..."}
+                        </p>
+                    </div>
+
+                    {/* Footer: Meta & Action */}
+                    <div className="flex flex-col gap-4 mt-auto">
+                        
+                        {/* Tags Row */}
+                        <div className="flex flex-wrap gap-2">
+                             <DifficultyBadge level={interview.difficulty} />
+                             {interview.tags?.slice(0, 2).map((tag, i) => (
+                                <span key={i} className="flex items-center gap-1 px-2 py-1 rounded-full border border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/5 text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                                   <Hash size={8} /> {tag}
+                                </span>
+                             ))}
+                        </div>
+
+                        {/* Divider */}
+                        <div className="h-px w-full bg-slate-100 dark:bg-white/5" />
+
+                        {/* Bottom Action */}
+                        <div className="flex items-center justify-between group/btn">
+                             <span className="text-xs font-bold uppercase tracking-widest text-slate-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                Read Log
+                             </span>
+                             <div className="p-2 rounded-full bg-slate-100 dark:bg-white/5 text-slate-400 group-hover:bg-purple-600 group-hover:text-white transition-all transform group-hover:-rotate-45">
+                                <ArrowUpRight size={16} />
+                             </div>
+                        </div>
+                    </div>
+                </SpotlightCard>
               ))}
             </AnimatePresence>
           </motion.div>
         )}
+
       </div>
     </div>
   )

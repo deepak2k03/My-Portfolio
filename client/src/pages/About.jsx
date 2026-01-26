@@ -119,7 +119,7 @@ const About = () => {
     { label: 'Stack', value: 'MERN', icon: Cpu, color: 'text-yellow-600 dark:text-yellow-400' },
   ]
 
-  const coreTech = ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Next.js', 'Tailwind', 'Git']
+  const coreTech = ['C++','Python','JavaScript','TailwindCSS','Material UI','Shadcn','React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Next.js','Bloackchain']
 
   return (
     // 🟢 FIX: Main background
