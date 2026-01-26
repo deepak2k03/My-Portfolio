@@ -1,15 +1,13 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from 'framer-motion'
-import SectionHeader from '../components/common/SectionHeader'
 import { interviewsAPI } from '../utils/api'
 import { 
-  Calendar, Building2, Briefcase, Search, ArrowUpRight, 
-  Filter, Loader2, AlertCircle, Terminal, Zap, Hash 
+  Building2, Briefcase, Search, ArrowUpRight, 
+  Filter, Loader2, Terminal, Zap, Hash 
 } from 'lucide-react'
 
 // --- 1. The Holographic Spotlight Card ---
-// This component tracks mouse position to create a "flashlight" reveal effect
 const SpotlightCard = ({ children, onClick, delay }) => {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -75,27 +73,45 @@ const DifficultyBadge = ({ level }) => {
 
 const Interviews = () => {
   const navigate = useNavigate()
+  // 🟢 FIX 1: Initialize loading to TRUE. This prevents the "Error" state from flashing before the fetch starts.
+  const [loading, setLoading] = useState(true) 
   const [interviews, setInterviews] = useState([])
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
 
   useEffect(() => {
+    // 🟢 FIX 2: Add an isMounted check to prevent race conditions during navigation
+    let isMounted = true
+
     const fetchInterviews = async () => {
       try {
-        setLoading(true)
-        setError('')
+        // Only set loading if we are re-fetching, though with init=true this isn't strictly necessary, it's good practice.
+        setError('') 
+        
+        console.log("Fetching interviews...") // Debug Log
         const res = await interviewsAPI.getAll()
-        setInterviews(res.data?.interviews || [])
+        
+        if (isMounted) {
+            console.log("Interviews fetched:", res.data) // Debug Log
+            setInterviews(res.data?.interviews || [])
+            setLoading(false)
+        }
       } catch (err) {
         console.error('[Interviews] fetch error:', err)
-        setError('Unable to access the secure archives.')
-      } finally {
-        setLoading(false)
+        if (isMounted) {
+            setError('Unable to access the secure archives.')
+            setLoading(false)
+        }
       }
     }
+
     fetchInterviews()
-  }, [])
+
+    // Cleanup function
+    return () => {
+      isMounted = false
+    }
+  }, []) // Empty dependency array ensures this runs once on mount
 
   const filteredInterviews = useMemo(() => {
     return interviews.filter(item => {
@@ -168,6 +184,13 @@ const Interviews = () => {
           </div>
         )}
         
+        {!loading && error && (
+          <div className="flex flex-col items-center justify-center py-20 text-red-500 gap-2">
+            <span className="text-lg font-bold">Connection Refused</span>
+            <p className="text-sm opacity-80">{error}</p>
+          </div>
+        )}
+
         {!loading && !error && filteredInterviews.length === 0 && (
           <div className="text-center py-24 opacity-50">
              <Filter className="w-12 h-12 mx-auto mb-4 text-slate-400" />
@@ -176,7 +199,7 @@ const Interviews = () => {
         )}
 
         {/* --- THE HOLOGRAPHIC GRID --- */}
-        {!loading && filteredInterviews.length > 0 && (
+        {!loading && !error && filteredInterviews.length > 0 && (
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
               {filteredInterviews.map((interview, index) => (
