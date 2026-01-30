@@ -154,7 +154,7 @@ const Achievements = () => {
   const stats = [
     { label: 'Global Rank', value: 'Knight', sub: 'LeetCode', icon: Crown, color: 'text-yellow-600 dark:text-yellow-400', bg: 'bg-yellow-100 dark:bg-[#0A0A0A]' },
     { label: 'Max Rating', value: '4 Stars', sub: 'CodeChef', icon: Star, color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-[#0A0A0A]' },
-    { label: 'Problems', value: '1500+', sub: 'Total Solved', icon: Code, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-[#0A0A0A]' },
+    { label: 'Rating', value: 'Expert', sub: 'Codefroces', icon: Code, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-[#0A0A0A]' },
     { label: 'Wins', value: '10x', sub: 'Hackathons', icon: Trophy, color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-100 dark:bg-[#0A0A0A]' },
   ]
 
@@ -168,22 +168,16 @@ const Achievements = () => {
         link: 'https://leetcode.com/deepak2k03'
       },
       {
-        id: 2, title: '4★ Coder', org: 'CodeChef', meta: 'Div 2', rarity: 'epic',
-        description: 'Consistent performance in Long Challenges. Solved hard-level dynamic programming problems.',
-        tags: ['Math', 'DP'], icon: <Star size={24} />,
+        id: 1, title: '4★ Coder', org: 'CodeChef', meta: '1885 Rating', rarity: 'legendary',
+        description: 'Consistent performance in Long Challenges. Solved hard-level problems.',
+        tags: ['DSA', 'Graphs'], icon: <Crown size={24} />,
         link: 'https://codechef.com/users/deepak2k03'
       },
       {
-        id: 3, title: 'Specialist', org: 'Codeforces', meta: '1450 Rating', rarity: 'rare',
-        description: 'Participated in 20+ rounds. Specialized in rapid C++ implementation.',
-        tags: ['Speed', 'STL'], icon: <Target size={24} />,
+        id: 1, title: 'Expert', org: 'Codeforeces', meta: '1909 Rating', rarity: 'legendary',
+        description: 'Participated in 70+ rounds. Specialized in rapid C++ implementation.',
+        tags: ['DSA', 'Graphs'], icon: <Crown size={24} />,
         link: 'https://codeforces.com/profile/deepak2k03'
-      },
-      {
-        id: 4, title: 'Institute Rank 1', org: 'GeeksForGeeks', meta: '500+ Solved', rarity: 'epic',
-        description: 'Consistently solving POTD. Ranked 1st in institute leaderboard.',
-        tags: ['DSA', 'Articles'], icon: <Terminal size={24} />,
-        link: 'https://auth.geeksforgeeks.org/user/deepak2k03'
       },
       {
         id: 5, title: 'Green Coder', org: 'AtCoder', meta: '850 Rating', rarity: 'rare',
@@ -192,76 +186,76 @@ const Achievements = () => {
         link: 'https://atcoder.jp/users/deepak2k03'
       },
       {
-        id: 6, title: '5 Star Gold', org: 'HackerRank', meta: 'Problem Solving', rarity: 'legendary',
+        id: 6, title: '5 Star Gold', org: 'HackerRank', meta: 'Problem Solving', rarity: 'Rare',
         description: 'Achieved 5 stars in Problem Solving and C++. Mastered core algorithms.',
         tags: ['Algorithms', 'C++'], icon: <Award size={24} />,
         link: 'https://www.hackerrank.com/deepak2k03'
       },
       {
-        id: 7, title: 'Circuit Rank', org: 'HackerEarth', meta: 'Top 5%', rarity: 'rare',
+        id: 7, title: 'Problem solver', org: 'HackerEarth', meta: 'Top 5%', rarity: 'rare',
         description: 'Active participant in monthly circuits and hiring challenges.',
         tags: ['Circuits', 'Hiring'], icon: <Globe size={24} />,
         link: 'https://www.hackerearth.com/@deepak2k03'
       },
       {
-        id: 8, title: 'Level 6', org: 'CodeStudio', meta: 'Ninja', rarity: 'epic',
+        id: 8, title: 'Ninja', org: 'CodeStudio', meta: 'Ninja', rarity: 'epic',
         description: 'Solved top interview problems. Expert in Guided Paths.',
         tags: ['Interviews', 'CN'], icon: <Zap size={24} />,
         link: 'https://www.codingninjas.com/codestudio/profile/deepak2k03'
       },
       {
-        id: 9, title: 'Level 7', org: 'InterviewBit', meta: '200+ Days', rarity: 'epic',
-        description: 'Maintained a 200-day streak. Cleared all level 7 programming checks.',
+        id: 9, title: 'Global Rank 477068', org: 'InterviewBit', meta: '200+ Days', rarity: 'epic',
+        description: 'Solving problems on interviewbit.',
         tags: ['System Design', 'Puzzles'], icon: <Cpu size={24} />,
         link: 'https://www.interviewbit.com/profile/deepak2k03'
       }
     ],
     hackathons: [
       {
-        id: 10, title: 'Smart India Hackathon', org: 'Govt of India', meta: 'Winner', rarity: 'legendary',
-        description: 'National Winner. Built an IoT traffic system that reduced congestion by 30% in simulations.',
-        tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
-      },
-      {
-        id: 11, title: 'HackFest 2024', org: 'IIT Kanpur', meta: 'Finalist', rarity: 'epic',
-        description: 'Created a decentralized voting dApp. Selected as top 10 from 500+ teams.',
+        id: 10, title: 'QIE Blockchain Hackathon', org: 'Hackerearth', meta: 'Participant', rarity: 'legendary',
+        description: 'Created a decentralized digital public transparency platform.',
         tags: ['Web3', 'React'], icon: <Flame size={24} />
       },
       {
-        id: 15, title: 'HackByte 3.0', org: 'IIIT Jabalpur', meta: 'Finalist', rarity: 'Rare',
+        id: 11, title: 'Microsoft Engage', org: 'Microsoft', meta: 'Participant', rarity: 'legendary',
+        description: 'Pitched idea on a decentralized digital public transparency platform.',
+        tags: ['Web3', 'React'], icon: <Flame size={24} />
+      },
+      {
+        id: 12, title: 'HackByte 3.0', org: 'IIIT Jabalpur', meta: 'Finalist', rarity: 'Rare',
         description: 'Selected among Top 120 teams across India. Built a skill exchanging platform',
         tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
       },
       {
-        id: 16, title: 'Zeros Arena', org: 'Code Geass', meta: 'Participant', rarity: 'epic',
+        id: 13, title: 'Zeros Arena', org: 'Code Geass', meta: 'Participant', rarity: 'epic',
         description: 'Created a web based virtual herbal garden using MERN stack.',
         tags: ['Web3', 'React'], icon: <Flame size={24} />
       },
       {
-        id: 17, title: 'Hack-o-Gravity', org: 'KNIT Sultanpur', meta: 'Participant', rarity: 'epic',
+        id: 14, title: 'Hack-o-Gravity', org: 'KNIT Sultanpur', meta: 'Participant', rarity: 'epic',
         description: 'Built a decentralized public services transparency platform using blockchain.',
         tags: ['Web3', 'React'], icon: <Flame size={24} />
       },
       {
-        id: 18, title: 'Purvanchal Tech Ideathon', org: 'KNIT Sultanpur', meta: 'Participant', rarity: 'epic',
+        id: 15, title: 'Purvanchal Tech Ideathon', org: 'KNIT Sultanpur', meta: 'Participant', rarity: 'epic',
         description: 'Presented an Startup idea on a decentralized public services transparency platform.',
         tags: ['Web3', 'React'], icon: <Flame size={24} />
-      }
+      },
+      {
+        id: 16, title: 'Adobe India Hckathon', org: 'Adobe', meta: 'Prticipant', rarity: 'legendary',
+        description: 'Participated in Round 1 in this online hackathon hosted on unstop.',
+        tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
+      },
     ],
     competitions: [
       {
-        id: 12, title: 'ICPC Regional', org: 'ICPC India', meta: 'Rank ~2000', rarity: 'legendary',
-        description: 'The "Olympics of Competitive Programming". Solved 3 complex algorithmic problems under pressure.',
+        id: 17, title: 'ICPC Regional', org: 'ICPC India', meta: 'Rank ~2000', rarity: 'legendary',
+        description: 'The "Olympics of Competitive Programming". Solved complex algorithmic problems under pressure.',
         tags: ['Algorithms', 'Team'], icon: <Globe size={24} />
       },
       {
-        id: 13, title: 'Google Code Jam', org: 'Google', meta: 'Round 2', rarity: 'epic',
-        description: 'Cleared qualification rounds. Tackled advanced graph theory and combinatorics.',
-        tags: ['Global'], icon: <Flag size={24} />
-      },
-      {
-        id: 14, title: 'Flipkart GRID', org: 'Flipkart', meta: 'Level 3', rarity: 'rare',
-        description: 'Software Development Challenge. Optimized a supply chain algorithm.',
+        id: 18, title: 'Flipkart GRID 6.0', org: 'Flipkart', meta: 'Level 3', rarity: 'rare',
+        description: 'Participated in the problem solving challeneg in this competition.',
         tags: ['Optimization'], icon: <Medal size={24} />
       },
       {
@@ -270,13 +264,18 @@ const Achievements = () => {
         tags: ['Global'], icon: <Flag size={24} />
       },
       {
-        id: 20, title: 'Flipkart GRID 6.0', org: 'Flipkart', meta: 'Round 1', rarity: 'rare',
+        id: 20, title: 'Amazon ML Summer School', org: 'Amazon', meta: 'Round 1', rarity: 'rare',
         description: 'Software Development Challenge. Solved algorithimic problems.',
         tags: ['Optimization'], icon: <Medal size={24} />
       },
       {
-        id: 21, title: 'Amazon ML Summer School', org: 'Amazon', meta: 'Round 1', rarity: 'rare',
-        description: 'Software Development Challenge. Solved algorithimic problems.',
+        id: 21, title: 'SHORT INT', org: 'KNIT, Sultanpur', meta: 'Top Rank', rarity: 'rare',
+        description: 'Competitive Programming Challenge. Solved algorithimic problems.',
+        tags: ['Optimization'], icon: <Medal size={24} />
+      },
+      {
+        id: 22, title: 'LONG INT', org: 'KNIT, Sultanpur', meta: 'Top Rank', rarity: 'rare',
+        description: 'Long form Competitive Programming Challenge. Solved algorithimic problems.',
         tags: ['Optimization'], icon: <Medal size={24} />
       }
     ]

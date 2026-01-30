@@ -20,10 +20,10 @@ import {
 
 export const personalInfo = {
   name: "Deepak Singh",
-  title: "MERN Stack Developer | Problem Solver",
+  title: "Full Sack Stack Developer | Problem Solver",
   description: "Building scalable web applications and loving every moment of problem-solving.",
   email: "sman59472@gmail.com",
-  location: "Prayagraj, India",
+  location: "Ghazipur, Uttar Pradesh, India",
   avatar: "/avatar.jpg", // Make sure avatar.jpg is in client/public folder
   
   // 📄 RESUME LINK:

@@ -115,11 +115,11 @@ const About = () => {
   const highlightStats = [
     { label: 'Experience', value: '3+ Yrs', icon: Briefcase, color: 'text-blue-600 dark:text-blue-400' },
     { label: 'Projects', value: '15+', icon: Terminal, color: 'text-purple-600 dark:text-purple-400' },
-    { label: 'Problems', value: '2000+', icon: Code, color: 'text-emerald-600 dark:text-emerald-400' },
+    { label: 'Problems', value: '2500+', icon: Code, color: 'text-emerald-600 dark:text-emerald-400' },
     { label: 'Stack', value: 'MERN', icon: Cpu, color: 'text-yellow-600 dark:text-yellow-400' },
   ]
 
-  const coreTech = ['C++','Python','JavaScript','TailwindCSS','Material UI','Shadcn','React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Next.js','Bloackchain']
+  const coreTech = ['C++','Python','JavaScript','TailwindCSS','Material UI','Shadcn','React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Next.js','Bloackchain','React-Native']
 
   return (
     // 🟢 FIX: Main background
