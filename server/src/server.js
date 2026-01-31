@@ -45,7 +45,7 @@ app.use(helmet()) // Basic security headers
 const allowedOrigins = [
   'http://localhost:3000',      // CRA default
   'http://localhost:5173',      // Vite default
-  'https://deepak-singh.pages.dev',      //coudflare
+  'https://deepak2k03.qzz.io/',      //coudflare
   process.env.CLIENT_URL,       // Your Vercel URL (from Render Env Vars)
   // 'https://your-portfolio.vercel.app' // Hardcode your Vercel URL here if env fails
 ]
