@@ -3,7 +3,8 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import SectionHeader from '../components/common/SectionHeader'
 import { 
   Trophy, Star, Target, Globe, Code, Zap, Medal, Crown, Flame, 
-  ExternalLink, Flag, Award, Terminal, Hash, Cpu, Layers 
+  ExternalLink, Flag, Award, Terminal, Hash, Cpu, Layers, 
+  Globe2
 } from 'lucide-react'
 
 // --- 1. 3D Tilt Card Component ---
@@ -168,25 +169,31 @@ const Achievements = () => {
         link: 'https://leetcode.com/deepak2k03'
       },
       {
-        id: 1, title: '4★ Coder', org: 'CodeChef', meta: '1885 Rating', rarity: 'legendary',
+        id: 2, title: '4 Star', org: 'CodeChef', meta: '1885 Rating', rarity: 'legendary',
         description: 'Consistent performance in Long Challenges. Solved hard-level problems.',
         tags: ['DSA', 'Graphs'], icon: <Crown size={24} />,
         link: 'https://codechef.com/users/deepak2k03'
       },
       {
-        id: 1, title: 'Expert', org: 'Codeforeces', meta: '1909 Rating', rarity: 'legendary',
+        id: 3, title: 'Expert', org: 'Codeforeces', meta: '1909 Rating', rarity: 'legendary',
         description: 'Participated in 70+ rounds. Specialized in rapid C++ implementation.',
         tags: ['DSA', 'Graphs'], icon: <Crown size={24} />,
         link: 'https://codeforces.com/profile/deepak2k03'
       },
       {
-        id: 5, title: 'Green Coder', org: 'AtCoder', meta: '850 Rating', rarity: 'rare',
+        id: 4, title: 'Green Coder', org: 'AtCoder', meta: '850 Rating', rarity: 'rare',
         description: 'Participating in Beginner Contests. Strong grasp of mathematical problems.',
         tags: ['Math', 'abc'], icon: <Target size={24} />,
         link: 'https://atcoder.jp/users/deepak2k03'
       },
       {
-        id: 6, title: '5 Star Gold', org: 'HackerRank', meta: 'Problem Solving', rarity: 'Rare',
+        id: 5, title: '3 Star', org: 'GeeksForGeeks', meta: '3 Stars', rarity: 'rare',
+        description: 'Participating in Beginner Contests. Strong grasp of mathematical problems.',
+        tags: ['Math', 'abc'], icon: <Target size={24} />,
+        link: 'https://www.geeksforgeeks.org/profile/deepak2k03'
+      },
+      {
+        id: 6, title: '5 Star', org: 'HackerRank', meta: 'Problem Solving', rarity: 'Rare',
         description: 'Achieved 5 stars in Problem Solving and C++. Mastered core algorithms.',
         tags: ['Algorithms', 'C++'], icon: <Award size={24} />,
         link: 'https://www.hackerrank.com/deepak2k03'
@@ -217,7 +224,7 @@ const Achievements = () => {
         tags: ['Web3', 'React'], icon: <Flame size={24} />
       },
       {
-        id: 11, title: 'Microsoft Engage', org: 'Microsoft', meta: 'Participant', rarity: 'legendary',
+        id: 11, title: 'Microsoft Imagine Cup 2026', org: 'Microsoft', meta: 'Participant', rarity: 'legendary',
         description: 'Pitched idea on a decentralized digital public transparency platform.',
         tags: ['Web3', 'React'], icon: <Flame size={24} />
       },
@@ -277,6 +284,18 @@ const Achievements = () => {
         id: 22, title: 'LONG INT', org: 'KNIT, Sultanpur', meta: 'Top Rank', rarity: 'rare',
         description: 'Long form Competitive Programming Challenge. Solved algorithimic problems.',
         tags: ['Optimization'], icon: <Medal size={24} />
+      },
+      {
+        id: 23, title: 'TESSARACT 2K26', org: 'IIIT Vadodara', meta: 'Rank 5', rarity: 'rare',
+        description: 'Achieved Rank 5 among 200+ participants in this reverse coding CP contest',
+        tags: ['Optimization'], icon: <Medal size={24} />
+      }
+    ],
+    opensource: [
+      {
+        id: 24, title: 'LLMS Foundation', org: 'LLM4S Foundation', meta: 'Open Source Contributor', rarity: 'rare',
+        description: 'Contributing to the LLM4S Project of LLM4S Foundation',
+        tags: ['Algorithms', 'Team'], icon: <Globe size={24} />
       }
     ]
   }
@@ -284,7 +303,8 @@ const Achievements = () => {
   const tabs = [
     { id: 'cp', label: 'CP Ranks', icon: Code },
     { id: 'hackathons', label: 'Hackathons', icon: Zap },
-    { id: 'competitions', label: 'Competitions', icon: Trophy }
+    { id: 'competitions', label: 'Competitions', icon: Trophy },
+    { id: 'opensource', label: 'Open Source', icon: Globe2 }
   ]
 
   return (

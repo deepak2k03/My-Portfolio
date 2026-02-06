@@ -7,6 +7,7 @@ import Dtube from '../image/Dtube.png';
 import Code_Complexity_Analyser from '../image/Code_Complexity_Analyser.png';
 import Countries_Explorer from '../image/Countries_Explorer.png'; 
 import DSA_Sheet from '../image/DSA_Sheet.png';
+import digitalAgency from '../image/digitalAgency.png'
 export const projects = [
   {
     id: 1,
@@ -14,7 +15,7 @@ export const projects = [
     description: "A web-based platform that tracks and displays government contracts, permits, and approvals in real time using blockchain technology.",
     image: PublicEye,
     techStack: ["React", "Node.js", "MongoDB", "Express", "JWT", "Tailwind CSS","Blockchain","Ethereum","Hardhat","Metamask"],
-    liveDemo: "https://publiceye-two.vercel.app/",
+    liveDemo: "https://public-eye-five.vercel.app/",
     githubRepo: "https://github.com/deepak2k03/PublicEye",
     featured: true,
     category: "Full Stack",
@@ -261,6 +262,54 @@ export const projects = [
     ],
     role: "Fullstack Developer",
     duration: "3 weeks",
+    challenges: [
+      "Creating smooth animations",
+      "Optimizing for mobile performance"
+    ]
+  },
+  {
+    id: 10,
+    title: "Digital Agency Page",
+    description: "A Professional page for Digital Agency",
+    longDescription: "This is a professional level page for a digital agency",
+    image: digitalAgency,
+    techStack: ["React", "TailwindCSS", "JavaScript"],
+    liveDemo: "https://assesment-react.netlify.app/",
+    githubRepo: "https://github.com/deepak2k03/Hike-Digital-Agency-Assessment",
+    featured: false,
+    category: "Frontend",
+    tags: ["React", "TailwindCSS", "JavaScript"],
+    features: [
+      "Responsive Design",
+      "Professional UI",
+      "Smooth animations"
+    ],
+    role: "Frontend Developer",
+    duration: "2 Days",
+    challenges: [
+      "Creating smooth animations",
+      "Optimizing for mobile performance"
+    ]
+  },
+  {
+    id: 10,
+    title: "Digital Agency Page",
+    description: "A Professional page for Digital Agency",
+    longDescription: "This is a professional level page for a digital agency",
+    image: digitalAgency,
+    techStack: ["React", "TailwindCSS", "JavaScript"],
+    liveDemo: "https://assesment-react.netlify.app/",
+    githubRepo: "https://github.com/deepak2k03/Hike-Digital-Agency-Assessment",
+    featured: false,
+    category: "Backend",
+    tags: ["React", "TailwindCSS", "JavaScript"],
+    features: [
+      "Responsive Design",
+      "Professional UI",
+      "Smooth animations"
+    ],
+    role: "Frontend Developer",
+    duration: "2 Days",
     challenges: [
       "Creating smooth animations",
       "Optimizing for mobile performance"
