@@ -69,7 +69,7 @@ const ProjectDetail = () => {
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0" />
       <div className="fixed inset-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <div className="container mx-auto px-6 md:px-12 py-12 md:py-20 relative z-10 max-w-[1800px]">
+      <div className="container mx-auto px-6 md:px-12 pt-28 pb-12 md:py-20 relative z-10 max-w-[1800px]">
         
         {/* Navigation Header */}
         <motion.div 
