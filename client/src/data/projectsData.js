@@ -45,7 +45,7 @@ export const projects = [
     longDescription: "Developed a full-stack MERN web platform that enables users to discover and track newly emerging technologies and frameworks, helping them stay aligned with industry trends. The platform integrates dynamic modules for curated learning resources and intelligent tool comparisons to support efficient upskilling. It also features automated insights and recommendation mechanisms that suggest cost-effective and sustainable technology alternatives, enhancing decision-making. AI-powered content categorization and trend analysis were leveraged to automate technology tracking workflows and deliver relevant, data-driven recommendations to users.",
     image: NeoCube,
     techStack: ["React", "Node.js", "MongoDB", "Socket.io", "Express", "JWT", -"Framer-Motion","Google Gemini API"],
-    liveDemo: "https://github.com/deepak2k03/NeoCube",
+    liveDemo: "https://neo-cube.vercel.app/",
     githubRepo: "https://github.com/deepak/task-management",
     featured: true,
     category: "Full Stack",
