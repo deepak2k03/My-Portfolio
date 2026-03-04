@@ -15,7 +15,7 @@ export const projects = [
     title: "NextFlow",
     description: "A visual LLM workflow builder inspired by Krea.ai. Build node-based pipelines with Text, Image, Video, and AI nodes; run them via Trigger.dev; and persist workflows and run history in PostgreSQL.",
     image: nextflow,
-    techStack: ["Next.js", "TypeScript", "", "React Flow", "Clerk", "Tailwind CSS","Trigger.dev","Gemini API","FFmpeg","Transloadit","zod","prisma"],
+    techStack: ["Next.js", "TypeScript", "Transloadit", "React Flow", "Clerk", "Tailwind CSS","Trigger.dev","Gemini API","FFmpeg","Transloadit","zod","prisma"],
     liveDemo: "https://next-flow-gray.vercel.app/",
     githubRepo: "https://github.com/deepak2k03/NextFlow",
     featured: true,
