@@ -40,7 +40,7 @@ export const stats = [
   },
   {
     label: "CodeChef Rating",
-    value: "4★",
+    value: "5★",
     icon: Trophy
   },
   {

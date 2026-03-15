@@ -9,9 +9,6 @@ import connectDB from './config/db.js'
 import interviewsRouter from './routes/interviews.js'
 import contactRouter from './routes/contact.js'
 
-// Connect to database
-connectDB()
-
 const app = express()
 const PORT = process.env.PORT || 5000
 
@@ -132,10 +129,21 @@ app.use((err, req, res, next) => {
   })
 })
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`)
-  console.log(`🌍 Allowed Origins:`, allowedOrigins)
-})
+// Start Server only after DB is ready
+const startServer = async () => {
+  try {
+    await connectDB()
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`)
+      console.log(`🌍 Allowed Origins:`, allowedOrigins)
+    })
+  } catch (error) {
+    console.error('Failed to start server:', error.message)
+    process.exit(1)
+  }
+}
+
+startServer()
 
 export default app

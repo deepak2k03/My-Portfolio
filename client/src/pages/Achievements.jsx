@@ -154,7 +154,7 @@ const Achievements = () => {
   // --- TOP HUD STATS ---
   const stats = [
     { label: 'Global Rank', value: 'Knight', sub: 'LeetCode', icon: Crown, color: 'text-yellow-600 dark:text-yellow-400', bg: 'bg-yellow-100 dark:bg-[#0A0A0A]' },
-    { label: 'Max Rating', value: '4 Stars', sub: 'CodeChef', icon: Star, color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-[#0A0A0A]' },
+    { label: 'Max Rating', value: '5 Stars', sub: 'CodeChef', icon: Star, color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-[#0A0A0A]' },
     { label: 'Rating', value: 'Expert', sub: 'Codefroces', icon: Code, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-[#0A0A0A]' },
     { label: 'Wins', value: '10x', sub: 'Hackathons', icon: Trophy, color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-100 dark:bg-[#0A0A0A]' },
   ]
@@ -169,7 +169,7 @@ const Achievements = () => {
         link: 'https://leetcode.com/deepak2k03'
       },
       {
-        id: 2, title: '4 Star', org: 'CodeChef', meta: '1885 Rating', rarity: 'legendary',
+        id: 2, title: '5 Star', org: 'CodeChef', meta: '1885 Rating', rarity: 'legendary',
         description: 'Consistent performance in Long Challenges. Solved hard-level problems.',
         tags: ['DSA', 'Graphs'], icon: <Crown size={24} />,
         link: 'https://codechef.com/users/deepak2k03'
@@ -328,41 +328,42 @@ const Achievements = () => {
         </div>
 
         {/* 1. HUD Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mb-12 sm:mb-16">
            {stats.map((stat, i) => (
              <motion.div
                key={stat.label}
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: i * 0.1 }}
-               className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none"
+               className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none"
              >
-                <div className={`p-3 rounded-xl ${stat.bg} ${stat.color} shadow-sm dark:shadow-lg`}>
-                   <stat.icon size={20} />
+                <div className={`p-2.5 sm:p-3 rounded-xl ${stat.bg} ${stat.color} shadow-sm dark:shadow-lg`}>
+                   <stat.icon size={18} className="sm:w-5 sm:h-5" />
                 </div>
-                <div>
-                   <div className="text-xl font-bold text-slate-900 dark:text-white">{stat.value}</div>
-                   <div className="text-xs text-slate-500 uppercase font-bold tracking-wider">{stat.sub}</div>
+                <div className="min-w-0">
+                   <div className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-tight truncate">{stat.value}</div>
+                   <div className="text-[11px] sm:text-xs text-slate-500 uppercase font-bold tracking-wider truncate">{stat.sub}</div>
                 </div>
              </motion.div>
            ))}
         </div>
 
         {/* 2. Sci-Fi Tab Switcher */}
-        <div className="flex justify-center mb-16">
-          <div className="inline-flex p-1.5 rounded-full bg-white border border-slate-200 dark:bg-[#0F0F0F] dark:border-white/10 relative shadow-sm dark:shadow-none">
+        <div className="mb-12 sm:mb-16">
+          <div className="mx-auto w-full max-w-3xl p-1.5 rounded-2xl sm:rounded-full bg-white border border-slate-200 dark:bg-[#0F0F0F] dark:border-white/10 relative shadow-sm dark:shadow-none">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-1.5">
              {tabs.map((tab) => {
                const isActive = activeTab === tab.id
                return (
                  <button
                    key={tab.id}
                    onClick={() => setActiveTab(tab.id)}
-                   className={`relative px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 z-10 ${isActive ? 'text-slate-900 dark:text-black' : 'text-slate-400 hover:text-slate-600 dark:hover:text-white'}`}
+                   className={`relative w-full sm:w-auto px-3 sm:px-5 lg:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 z-10 whitespace-nowrap ${isActive ? 'text-slate-900 dark:text-black' : 'text-slate-400 hover:text-slate-600 dark:hover:text-white'}`}
                  >
                    {isActive && (
                      <motion.div
                        layoutId="activeTab"
-                       className="absolute inset-0 bg-slate-100 dark:bg-white rounded-full shadow-sm"
+                        className="absolute inset-0 bg-slate-100 dark:bg-white rounded-xl sm:rounded-full shadow-sm"
                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                      />
                    )}
@@ -371,6 +372,7 @@ const Achievements = () => {
                  </button>
                )
              })}
+            </div>
           </div>
         </div>
 

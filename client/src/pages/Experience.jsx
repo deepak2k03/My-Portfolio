@@ -78,7 +78,7 @@ const Experience = () => {
     {
       title: 'Full Stack Developer Intern',
       company: 'SoundSpire',
-      duration: 'Jan 2026 - Present',
+      duration: 'Jan 2026 - Mar 2026',
       location: 'Remote',
       type: 'Internship',
       icon: Code2,
@@ -113,7 +113,7 @@ const Experience = () => {
     },
     {
       title: 'Open Source Contributor',
-      company: 'Scala Center',
+      company: 'LLM4S Foundation',
       duration: '2026 - Present',
       location: 'Lausanne, Vaud',
       type: 'Scala Developer',

@@ -1,8 +1,10 @@
+import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion' 
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/layout/ScrollToTop'
+import { systemAPI } from './utils/api'
 
 // Pages
 import Home from './pages/Home'
@@ -19,6 +21,13 @@ import InterviewDetail from './pages/InterviewDetail'
 
 function App() {
   const location = useLocation() 
+
+  useEffect(() => {
+    // Warm up the backend in the background so first page interactions are faster.
+    systemAPI.warmUp().catch(() => {
+      // No-op: user flows still handle errors per page.
+    })
+  }, [])
 
   return (
     // 🔴 FIX: Changed hardcoded 'bg-[#020202]' to dynamic 'bg-gray-50 dark:bg-[#020202]'
