@@ -212,7 +212,7 @@ const Achievements = () => {
       },
       {
         id: 9, title: 'Global Rank 477068', org: 'InterviewBit', meta: '200+ Days', rarity: 'epic',
-        description: 'Solving problems on interviewbit.',
+        description: 'Solving problems on interviewbit and tackling algorithmic challenges.',
         tags: ['System Design', 'Puzzles'], icon: <Cpu size={24} />,
         link: 'https://www.interviewbit.com/profile/deepak2k03'
       }

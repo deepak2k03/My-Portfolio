@@ -76,6 +76,24 @@ const Experience = () => {
 
   const experiences = [
     {
+      title: 'Open Source Contributor',
+      company: 'LLM4S Foundation',
+      duration: '2026 - Present',
+      location: 'Lausanne, Vaud',
+      type: 'Scala Developer',
+      icon: Code2,
+      color: 'bg-red-500',
+      textColor: 'text-red-400',
+      description: 'Active contributor to the Scala ecosystem, focusing on tooling, CI/CD pipelines, and LLM integrations.',
+      achievements: [
+        'Contributing to the LLM4S project architecture',
+        'Merged critical CI pipeline improvements',
+        'Authored comprehensive documentation for new modules',
+        'Implemented unit tests increasing coverage by 15%',
+      ],
+      stack: ['Scala', 'sbt', 'GitHub Actions', 'LLMs']
+    },
+    {
       title: 'Full Stack Developer Intern',
       company: 'SoundSpire',
       duration: 'Jan 2026 - Mar 2026',
@@ -91,7 +109,7 @@ const Experience = () => {
         'Implemented secure JWT authentication flows',
         'Optimized MongoDB queries, improving latency by ~40%',
       ],
-      stack: ['Node.js', 'React', 'MongoDB', 'Express']
+      stack: ['Node.js', 'NextJS', 'Supabase', 'React']
     },
     {
       title: 'Full Stack Developer Intern',
@@ -109,25 +127,7 @@ const Experience = () => {
         'Integrated Razorpay payment gateway',
         'Reduced bundle size by 25% via code splitting',
       ],
-      stack: ['Node.js', 'React', 'Redux', 'AWS']
-    },
-    {
-      title: 'Open Source Contributor',
-      company: 'LLM4S Foundation',
-      duration: '2026 - Present',
-      location: 'Lausanne, Vaud',
-      type: 'Scala Developer',
-      icon: Code2,
-      color: 'bg-red-500',
-      textColor: 'text-red-400',
-      description: 'Active contributor to the Scala ecosystem, focusing on tooling, CI/CD pipelines, and LLM integrations.',
-      achievements: [
-        'Contributing to the LLM4S project architecture',
-        'Merged critical CI pipeline improvements',
-        'Authored comprehensive documentation for new modules',
-        'Implemented unit tests increasing coverage by 15%',
-      ],
-      stack: ['Scala', 'sbt', 'GitHub Actions', 'LLMs']
+      stack: ['Node.js', 'React', 'Material UI', 'Bootstrap']
     },
     {
       title: 'Placement Representative',
