@@ -7,6 +7,48 @@ import {
   Filter, Loader2, Terminal, Zap, Hash 
 } from 'lucide-react'
 
+const INTERVIEWS_CACHE_KEY = 'portfolio:interviews:list:v2'
+const INTERVIEWS_CACHE_TTL_MS = 1000 * 60 * 30
+
+const readInterviewsCache = () => {
+  try {
+    const cachedValue = localStorage.getItem(INTERVIEWS_CACHE_KEY)
+
+    if (!cachedValue) {
+      return []
+    }
+
+    const parsedCache = JSON.parse(cachedValue)
+
+    if (!parsedCache?.timestamp || !Array.isArray(parsedCache?.interviews)) {
+      return []
+    }
+
+    if (Date.now() - parsedCache.timestamp > INTERVIEWS_CACHE_TTL_MS) {
+      return []
+    }
+
+    return parsedCache.interviews
+  } catch (error) {
+    console.error('[Interviews] cache read error:', error)
+    return []
+  }
+}
+
+const writeInterviewsCache = (interviews) => {
+  try {
+    localStorage.setItem(
+      INTERVIEWS_CACHE_KEY,
+      JSON.stringify({
+        interviews,
+        timestamp: Date.now(),
+      })
+    )
+  } catch (error) {
+    console.error('[Interviews] cache write error:', error)
+  }
+}
+
 // --- 1. The Holographic Spotlight Card ---
 const SpotlightCard = ({ children, onClick, delay }) => {
   const mouseX = useMotionValue(0)
@@ -73,32 +115,39 @@ const DifficultyBadge = ({ level }) => {
 
 const Interviews = () => {
   const navigate = useNavigate()
-  // 🟢 FIX 1: Initialize loading to TRUE. This prevents the "Error" state from flashing before the fetch starts.
   const [loading, setLoading] = useState(true) 
   const [interviews, setInterviews] = useState([])
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    // 🟢 FIX 2: Add an isMounted check to prevent race conditions during navigation
     let isMounted = true
+    const cachedInterviews = readInterviewsCache()
+
+    if (cachedInterviews.length > 0) {
+      setInterviews(cachedInterviews)
+      setLoading(false)
+    }
 
     const fetchInterviews = async () => {
       try {
-        // Only set loading if we are re-fetching, though with init=true this isn't strictly necessary, it's good practice.
-        setError('') 
-        
-        console.log("Fetching interviews...") // Debug Log
-        const res = await interviewsAPI.getAll()
+        setError('')
+
+        const res = await interviewsAPI.getAll({
+          limit: 100,
+          summary: true,
+          includeTotal: false,
+        })
+        const nextInterviews = res.data?.interviews || []
         
         if (isMounted) {
-            console.log("Interviews fetched:", res.data) // Debug Log
-            setInterviews(res.data?.interviews || [])
+            setInterviews(nextInterviews)
+            writeInterviewsCache(nextInterviews)
             setLoading(false)
         }
       } catch (err) {
         console.error('[Interviews] fetch error:', err)
-        if (isMounted) {
+        if (isMounted && cachedInterviews.length === 0) {
             setError('Unable to access the secure archives.')
             setLoading(false)
         }
@@ -107,11 +156,10 @@ const Interviews = () => {
 
     fetchInterviews()
 
-    // Cleanup function
     return () => {
       isMounted = false
     }
-  }, []) // Empty dependency array ensures this runs once on mount
+  }, [])
 
   const filteredInterviews = useMemo(() => {
     return interviews.filter(item => {

@@ -117,6 +117,9 @@ interviewSchema.index({
   tags: 'text'
 })
 
+interviewSchema.index({ createdAt: -1 })
+interviewSchema.index({ featured: 1, createdAt: -1 })
+
 // Virtual for preview text
 interviewSchema.virtual('previewText').get(function() {
   const text = this.detailedWriteup.preparation || ''

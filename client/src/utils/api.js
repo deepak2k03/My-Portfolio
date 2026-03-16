@@ -1,8 +1,30 @@
 import axios from 'axios'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const getApiBaseUrl = () => {
+  const configuredApiUrl = import.meta.env.VITE_API_URL?.trim()
+
+  if (configuredApiUrl) {
+    return configuredApiUrl
+  }
+
+  if (typeof window !== 'undefined') {
+    const { hostname, origin } = window.location
+
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'http://localhost:5000/api'
+    }
+
+    return `${origin}/api`
+  }
+
+  return 'http://localhost:5000/api'
+}
+
+const API_BASE_URL = getApiBaseUrl()
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const DEFAULT_TIMEOUT_MS = 10000
 
 const isRetryableError = (error) => {
   const status = error?.response?.status
@@ -38,7 +60,7 @@ const withRetry = async (requestFn, { retries = 3, delayMs = 1500 } = {}) => {
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 15000,
+  timeout: DEFAULT_TIMEOUT_MS,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -54,8 +76,8 @@ api.interceptors.response.use(
 
 export const interviewsAPI = {
   // Retry reads to handle backend cold starts for first-time visitors.
-  getAll: (params = {}) => withRetry(() => api.get('/interviews', { params }), { retries: 4, delayMs: 1500 }),
-  getById: (id) => withRetry(() => api.get(`/interviews/${id}`), { retries: 2, delayMs: 1000 }),
+  getAll: (params = {}) => withRetry(() => api.get('/interviews', { params, timeout: 8000 }), { retries: 1, delayMs: 500 }),
+  getById: (id) => withRetry(() => api.get(`/interviews/${id}`, { timeout: 8000 }), { retries: 1, delayMs: 500 }),
   create: (data) => api.post('/interviews', data),
   update: (id, data) => api.put(`/interviews/${id}`, data),
   delete: (id) => api.delete(`/interviews/${id}`),

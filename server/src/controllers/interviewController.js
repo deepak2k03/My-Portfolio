@@ -1,5 +1,17 @@
 import InterviewExperience from '../models/InterviewExperience.js'
 
+const MAX_LIMIT = 100
+
+const buildPreviewText = (text = '') => {
+  const normalizedText = String(text).trim()
+
+  if (normalizedText.length <= 150) {
+    return normalizedText
+  }
+
+  return `${normalizedText.slice(0, 150)}...`
+}
+
 // @desc    Get all interview experiences
 // @route   GET /api/interviews
 // @access  Public
@@ -13,8 +25,15 @@ export const getAllInterviews = async (req, res) => {
       difficulty,
       type,
       featured,
-      search
+      search,
+      summary = 'false',
+      includeTotal = 'false'
     } = req.query
+
+    const pageNumber = Math.max(parseInt(page, 10) || 1, 1)
+    const limitNumber = Math.min(Math.max(parseInt(limit, 10) || 10, 1), MAX_LIMIT)
+    const summaryMode = summary === 'true'
+    const shouldIncludeTotal = includeTotal === 'true'
 
     const query = {}
 
@@ -25,30 +44,55 @@ export const getAllInterviews = async (req, res) => {
     if (type) query.type = type
     if (featured === 'true') query.featured = true
 
-    let interviews
-
     if (search) {
-      interviews = await InterviewExperience.search(search)
-        .find(query)
-        .limit(limit * 1)
-        .skip((page - 1) * limit)
-        .sort({ createdAt: -1 })
-    } else {
-      interviews = await InterviewExperience.find(query)
-        .limit(limit * 1)
-        .skip((page - 1) * limit)
-        .sort({ createdAt: -1 })
+      query.$text = { $search: search }
     }
 
-    const total = await InterviewExperience.countDocuments(query)
+    let interviewsQuery = InterviewExperience.find(query)
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber)
+
+    if (summaryMode) {
+      interviewsQuery = interviewsQuery.select({
+        company: 1,
+        role: 1,
+        date: 1,
+        difficulty: 1,
+        type: 1,
+        tags: 1,
+        featured: 1,
+        createdAt: 1,
+        'detailedWriteup.preparation': 1,
+      })
+    }
+
+    if (search) {
+      interviewsQuery = interviewsQuery
+        .select({ score: { $meta: 'textScore' } })
+        .sort({ score: { $meta: 'textScore' }, createdAt: -1 })
+    } else {
+      interviewsQuery = interviewsQuery.sort({ createdAt: -1 })
+    }
+
+    const interviewsResult = await interviewsQuery.lean()
+    const interviews = summaryMode
+      ? interviewsResult.map(({ detailedWriteup, ...interview }) => ({
+          ...interview,
+          previewText: buildPreviewText(detailedWriteup?.preparation),
+        }))
+      : interviewsResult
+
+    const total = shouldIncludeTotal ? await InterviewExperience.countDocuments(query) : null
+
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300')
 
     res.json({
       interviews,
       pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
+        page: pageNumber,
+        limit: limitNumber,
         total,
-        pages: Math.ceil(total / limit)
+        pages: total === null ? null : Math.ceil(total / limitNumber)
       }
     })
   } catch (error) {
