@@ -13,10 +13,7 @@ const interviewSchema = new mongoose.Schema({
     maxlength: 100,
     trim: true
   },
-  date: {
-    type: Date,
-    required: true
-  },
+
   difficulty: {
     type: String,
     required: true,
@@ -34,6 +31,9 @@ const interviewSchema = new mongoose.Schema({
       type: String,
       required: true,
       trim: true
+    },
+    date: {
+      type: Date
     },
     description: {
       type: String,

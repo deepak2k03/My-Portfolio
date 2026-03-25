@@ -275,9 +275,9 @@ const Interviews = () => {
                                 </div>
                             </div>
                         </div>
-                        {interview.date && (
+                        {interview.rounds?.[0]?.date && (
                             <span className="px-2 py-1 rounded-md bg-slate-100 dark:bg-white/5 text-[10px] font-mono font-bold text-slate-500 uppercase">
-                                {new Date(interview.date).toLocaleDateString(undefined, { month: 'short', year: '2-digit' })}
+                                {new Date(interview.rounds[0].date).toLocaleDateString(undefined, { month: 'short', year: '2-digit' })}
                             </span>
                         )}
                     </div>

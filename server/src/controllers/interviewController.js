@@ -56,7 +56,8 @@ export const getAllInterviews = async (req, res) => {
       interviewsQuery = interviewsQuery.select({
         company: 1,
         role: 1,
-        date: 1,
+        'rounds.date': 1,
+        'rounds.roundName': 1,
         difficulty: 1,
         type: 1,
         tags: 1,

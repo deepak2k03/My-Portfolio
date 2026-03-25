@@ -216,11 +216,19 @@ const InterviewDetail = () => {
                           <h4 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                             {round.roundName || `Round ${idx + 1}`}
                           </h4>
-                          {round.duration && (
-                            <span className="text-xs font-mono text-slate-500 border border-slate-200 dark:border-white/10 px-2 py-1 rounded">
-                              {round.duration}
-                            </span>
-                          )}
+                          <div className="flex items-center gap-2">
+                            {round.date && (
+                              <span className="text-xs font-mono text-slate-500 border border-slate-200 dark:border-white/10 px-2 py-1 rounded flex items-center gap-1">
+                                <Calendar size={10} />
+                                {new Date(round.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: '2-digit' })}
+                              </span>
+                            )}
+                            {round.duration && (
+                              <span className="text-xs font-mono text-slate-500 border border-slate-200 dark:border-white/10 px-2 py-1 rounded">
+                                {round.duration}
+                              </span>
+                            )}
+                          </div>
                         </div>
 
                         {round.description && (
@@ -342,16 +350,6 @@ const InterviewDetail = () => {
                 </h4>
 
                 <div className="space-y-4">
-                  {interview.date && (
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                        <Calendar size={14} /> Date
-                      </span>
-                      <span className="text-slate-900 dark:text-white font-mono">
-                        {new Date(interview.date).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
 
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-slate-500 dark:text-slate-400 flex items-center gap-2">
