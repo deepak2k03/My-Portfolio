@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { interviewsAPI } from "../utils/api.js";
+import { interviewsAPI, backendReady } from "../utils/api.js";
 import {
   ArrowLeft,
   Calendar,
@@ -81,6 +81,8 @@ const InterviewDetail = () => {
     const fetchInterview = async () => {
       try {
         setLoading(true);
+        // Wait for the backend to be awake before requesting data
+        await backendReady();
         const res = await interviewsAPI.getById(id);
         setInterview(res?.data?.interview || null);
       } catch (err) {

@@ -75,9 +75,9 @@ api.interceptors.response.use(
 )
 
 export const interviewsAPI = {
-  // Retry reads to handle backend cold starts for first-time visitors.
-  getAll: (params = {}) => withRetry(() => api.get('/interviews', { params, timeout: 8000 }), { retries: 1, delayMs: 500 }),
-  getById: (id) => withRetry(() => api.get(`/interviews/${id}`, { timeout: 8000 }), { retries: 1, delayMs: 500 }),
+  // Retry reads with generous timeouts to survive backend cold starts (~30-50s).
+  getAll: (params = {}) => withRetry(() => api.get('/interviews', { params, timeout: 30000 }), { retries: 3, delayMs: 2000 }),
+  getById: (id) => withRetry(() => api.get(`/interviews/${id}`, { timeout: 30000 }), { retries: 3, delayMs: 2000 }),
   create: (data) => api.post('/interviews', data),
   update: (id, data) => api.put(`/interviews/${id}`, data),
   delete: (id) => api.delete(`/interviews/${id}`),
@@ -88,7 +88,19 @@ export const contactAPI = {
 }
 
 export const systemAPI = {
-  warmUp: () => withRetry(() => api.get('/health', { timeout: 10000 }), { retries: 2, delayMs: 1000 }),
+  warmUp: () => withRetry(() => api.get('/health', { timeout: 45000 }), { retries: 4, delayMs: 3000 }),
+}
+
+// Shared warm-up promise: call once at app boot, pages await this before fetching data.
+// Resolves when the backend responds to /health; swallows errors so pages still try their own fetch.
+let _backendReadyPromise = null
+export const backendReady = () => {
+  if (!_backendReadyPromise) {
+    _backendReadyPromise = systemAPI.warmUp().catch(() => {
+      // Warm-up failed after all retries – let pages attempt their own requests anyway.
+    })
+  }
+  return _backendReadyPromise
 }
 
 export default api

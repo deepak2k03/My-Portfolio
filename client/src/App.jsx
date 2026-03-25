@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import ScrollToTop from './components/layout/ScrollToTop'
-import { systemAPI } from './utils/api'
+import { backendReady } from './utils/api'
 
 // Pages
 import Home from './pages/Home'
@@ -23,10 +23,8 @@ function App() {
   const location = useLocation() 
 
   useEffect(() => {
-    // Warm up the backend in the background so first page interactions are faster.
-    systemAPI.warmUp().catch(() => {
-      // No-op: user flows still handle errors per page.
-    })
+    // Kick off the shared warm-up promise so the backend starts waking immediately.
+    backendReady()
   }, [])
 
   return (

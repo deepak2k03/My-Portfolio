@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from 'framer-motion'
-import { interviewsAPI } from '../utils/api'
+import { interviewsAPI, backendReady } from '../utils/api'
 import { 
   Building2, Briefcase, Search, ArrowUpRight, 
   Filter, Loader2, Terminal, Zap, Hash 
@@ -132,6 +132,9 @@ const Interviews = () => {
     const fetchInterviews = async () => {
       try {
         setError('')
+
+        // Wait for the backend to be awake before requesting data
+        await backendReady()
 
         const res = await interviewsAPI.getAll({
           limit: 100,
