@@ -1,42 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { motion, useScroll, useSpring, useMotionValue, useTransform } from 'framer-motion'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { 
   ArrowLeft, Github, ExternalLink, Layers, 
   Cpu, Code2, CheckCircle2, Zap, Globe, Calendar, User, ArrowUpRight 
 } from 'lucide-react'
 import { getProjectById } from '../data/projectsData'
-
-// --- 3D Gyroscopic Tilt Component ---
-const TiltCard = ({ children }) => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const mouseX = useSpring(x, { stiffness: 150, damping: 15 })
-  const mouseY = useSpring(y, { stiffness: 150, damping: 15 })
-
-  function handleMouseMove({ currentTarget, clientX, clientY }) {
-    const { left, top, width, height } = currentTarget.getBoundingClientRect()
-    // Calculate tilt based on mouse position
-    x.set((clientX - left) / width - 0.5)
-    y.set((clientY - top) / height - 0.5)
-  }
-
-  return (
-    <motion.div
-      style={{
-        rotateY: useTransform(mouseX, [-0.5, 0.5], ["-8deg", "8deg"]),
-        rotateX: useTransform(mouseY, [-0.5, 0.5], ["8deg", "-8deg"]),
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { x.set(0); y.set(0) }}
-      className="perspective-1000 w-full cursor-pointer"
-    >
-      <div className="transition-transform duration-200 ease-out">
-         {children}
-      </div>
-    </motion.div>
-  )
-}
+import TiltCard from '../components/common/TiltCard'
 
 const ProjectDetail = () => {
   const { id } = useParams()

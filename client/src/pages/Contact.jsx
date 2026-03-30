@@ -1,52 +1,11 @@
 import { useState } from 'react'
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import emailjs from '@emailjs/browser' // 🟢 ADDED THIS IMPORT
+import emailjs from '@emailjs/browser'
 import SectionHeader from '../components/common/SectionHeader'
+import TiltCard from '../components/common/TiltCard'
 import { Send, Mail, MapPin, CheckCircle2, User, Type, MessageSquare, Terminal, Github, Linkedin, Twitter, Loader2 } from 'lucide-react'
-
-// --- 1. 3D Tilt Physics Engine (Unchanged) ---
-const TiltCard = ({ children, className = "" }) => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const mouseX = useSpring(x, { stiffness: 500, damping: 100 })
-  const mouseY = useSpring(y, { stiffness: 500, damping: 100 })
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"])
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"])
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const width = rect.width
-    const height = rect.height
-    const mouseX = e.clientX - rect.left
-    const mouseY = e.clientY - rect.top
-    const xPct = mouseX / width - 0.5
-    const yPct = mouseY / height - 0.5
-    x.set(xPct)
-    y.set(yPct)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <motion.div
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`relative z-10 ${className}`}
-    >
-      <div style={{ transform: "translateZ(30px)" }}>
-        {children}
-      </div>
-    </motion.div>
-  )
-}
 
 // --- 2. Input Field (Unchanged) ---
 const InputField = ({ label, id, type = "text", register, validation, error, placeholder, isTextArea = false, icon: Icon }) => (
@@ -104,10 +63,9 @@ const Contact = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     
-    // 🟢 EMAILJS LOGIC STARTS HERE
-    const serviceId = "service_zc1novv";     // 🔴 PASTE YOUR SERVICE ID HERE
-    const templateId = "template_skjx21r";   // 🔴 PASTE YOUR TEMPLATE ID HERE
-    const publicKey = "4u9_2cOujN3lPSQXl";     // 🔴 PASTE YOUR PUBLIC KEY HERE
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     // Create an object that matches your EmailJS template variables
     const templateParams = {
@@ -134,12 +92,11 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-50 py-24 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white py-24 relative overflow-hidden transition-colors duration-300 font-sans selection:bg-purple-500/30">
       
-      {/* Background Effects */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/10 dark:bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 dark:bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background FX (Matching Projects Page) */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
+      <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         

@@ -36,7 +36,6 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled 
-          // 🔴 FIX: Added white bg for light mode, kept dark for dark mode
           ? 'bg-white/80 dark:bg-[#020202]/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5 py-4' 
           : 'bg-transparent py-6'
       }`}
@@ -52,7 +51,6 @@ const Navbar = () => {
           <div className="p-2 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 group-hover:border-purple-500/50 transition-colors">
             <Terminal size={20} className="text-purple-600 dark:text-purple-400" />
           </div>
-          {/* 🔴 FIX: Updated text gradient to be visible on white background */}
           <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-slate-600 dark:from-white dark:to-slate-400">
             Deepak<span className="text-purple-600 dark:text-purple-500">.dev</span>
           </span>
@@ -108,7 +106,6 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            // 🔴 FIX: Added white bg for mobile menu in light mode
             className="lg:hidden overflow-hidden bg-white/95 dark:bg-[#020202]/95 backdrop-blur-xl border-b border-gray-200 dark:border-white/10"
           >
             <div className="container-custom py-8 flex flex-col gap-2">

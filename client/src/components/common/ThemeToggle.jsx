@@ -1,38 +1,8 @@
-import { useEffect, useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { useTheme } from '../../context/ThemeContext'
 
 const ThemeToggle = () => {
-  // 1. Initialize state from localStorage or system preference
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      if (localStorage.getItem('theme')) {
-        return localStorage.getItem('theme')
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark'
-      }
-    }
-    return 'light'
-  })
-
-  // 2. Apply the theme to the HTML tag whenever state changes
-  useEffect(() => {
-    const root = window.document.documentElement
-    
-    if (theme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
-    
-    // Save to localStorage
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
-  }
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <button

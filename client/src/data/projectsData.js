@@ -26,7 +26,7 @@ export const projects = [
       "6 Node types",
       "Animated purple edge connections between nodes",
       "Saving workflows",
-      "Watch node run hostory",
+      "Watch node run history",
       "Support for undo and redo",
       "Responsive design for all devices"
     ],
@@ -35,7 +35,7 @@ export const projects = [
     challenges: [
       "Implementing JSON Data handling",
       "Integrating trigger.dev",
-      "Handling erros",
+      "Handling errors",
       "Building responsiveness for all devices"
     ]
   },
@@ -74,7 +74,7 @@ export const projects = [
     description: "NeoCube uses Gemini AI to generate precise, step-by-step learning roadmaps for any technology. Stop searching, start building.",
     longDescription: "Developed a full-stack MERN web platform that enables users to discover and track newly emerging technologies and frameworks, helping them stay aligned with industry trends. The platform integrates dynamic modules for curated learning resources and intelligent tool comparisons to support efficient upskilling. It also features automated insights and recommendation mechanisms that suggest cost-effective and sustainable technology alternatives, enhancing decision-making. AI-powered content categorization and trend analysis were leveraged to automate technology tracking workflows and deliver relevant, data-driven recommendations to users.",
     image: NeoCube,
-    techStack: ["React", "Node.js", "MongoDB", "Socket.io", "Express", "JWT", -"Framer-Motion","Google Gemini API"],
+    techStack: ["React", "Node.js", "MongoDB", "Socket.io", "Express", "JWT", "Framer Motion","Google Gemini API"],
     liveDemo: "https://neo-cube.vercel.app/",
     githubRepo: "https://github.com/deepak/task-management",
     featured: true,
@@ -83,7 +83,7 @@ export const projects = [
     features: [
       "User Authentication and Authorization",
       "Roadmaps to Learn Technologies",
-      "Technologies across variaous Domains",
+      "Technologies across various Domains",
       "AI Generated Roadmaps",
       "Progress tracking and analytics",
       "Role-based permissions",
@@ -111,7 +111,7 @@ export const projects = [
     category: "Full Stack",
     tags: ["React", "Node", "Express", "MongoDB", "JWT"],
     features: [
-      "Skill Exchaning",
+      "Skill Exchanging",
       "Responsive UI",
       "Verification of Users",
       "Rating and Feedback",
@@ -258,7 +258,7 @@ export const projects = [
     features: [
       "Real-time Countries updates",
       "Fetching countries Data from API",
-      "Searching countries Baesd on contiinents",
+      "Searching countries Based on continents",
       "Dark and Light Mode"
     ],
     role: "Frontend Developer",
@@ -283,7 +283,7 @@ export const projects = [
     category: "Full Stack",
     tags: ["React", "Node", "Express", "Mongodb", "Fullstack"],
     features: [
-      "Authentication and uthorizaton using JWT",
+      "Authentication and authorization using JWT",
       "Curated problems",
       "Complete topics of DSA",
       "Progress Tracking",
@@ -308,30 +308,6 @@ export const projects = [
     githubRepo: "https://github.com/deepak2k03/Hike-Digital-Agency-Assessment",
     featured: false,
     category: "Frontend",
-    tags: ["React", "TailwindCSS", "JavaScript"],
-    features: [
-      "Responsive Design",
-      "Professional UI",
-      "Smooth animations"
-    ],
-    role: "Frontend Developer",
-    duration: "2 Days",
-    challenges: [
-      "Creating smooth animations",
-      "Optimizing for mobile performance"
-    ]
-  },
-  {
-    id: 12,
-    title: "Digital Agency Page",
-    description: "A Professional page for Digital Agency",
-    longDescription: "This is a professional level page for a digital agency",
-    image: digitalAgency,
-    techStack: ["React", "TailwindCSS", "JavaScript"],
-    liveDemo: "https://assesment-react.netlify.app/",
-    githubRepo: "https://github.com/deepak2k03/Hike-Digital-Agency-Assessment",
-    featured: false,
-    category: "Backend",
     tags: ["React", "TailwindCSS", "JavaScript"],
     features: [
       "Responsive Design",

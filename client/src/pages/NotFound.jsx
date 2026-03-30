@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
-    // 🟢 FIX: Main Background & Text Color
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-200 font-sans transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -16,7 +15,6 @@ const NotFound = () => {
           animate={{ y: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
-          {/* 🟢 FIX: Adaptive Gradient Text */}
           <h1 className="text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 mb-4">
             404
           </h1>
@@ -27,7 +25,6 @@ const NotFound = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          {/* 🟢 FIX: Text Colors */}
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Page Not Found
           </h2>
@@ -42,7 +39,6 @@ const NotFound = () => {
           transition={{ delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          {/* 🟢 FIX: Button Styles */}
           <Link
             to="/"
             className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium shadow-lg shadow-purple-500/20 transition-all duration-300 hover:-translate-y-0.5"

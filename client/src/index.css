@@ -14,13 +14,13 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* 🟢 FIX: Define global background/text colors here using @apply */
+  /* Define global background/text colors here using @apply */
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     @apply bg-gray-50 text-slate-900 transition-colors duration-300;
   }
 
-  /* 🟢 FIX: Dark mode override */
+  /* Dark mode override */
   .dark body {
     @apply bg-[#020202] text-slate-50;
   }

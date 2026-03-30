@@ -14,7 +14,6 @@ function SpotlightWrapper({ children, className = "" }) {
 
   return (
     <div
-      // 🟢 FIX: Adaptive Background & Border
       className={`group relative border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A0A0A] overflow-hidden ${className}`}
       onMouseMove={handleMouseMove}
     >
@@ -50,7 +49,6 @@ const CircularProgress = ({ level }) => {
   return (
     <div className="relative flex items-center justify-center">
       <svg className="transform -rotate-90 w-12 h-12">
-        {/* 🟢 FIX: Adaptive Track Color */}
         <circle cx="24" cy="24" r={radius} stroke="currentColor" strokeWidth="3" fill="transparent" className="text-slate-200 dark:text-slate-800" />
         <circle
           cx="24" cy="24" r={radius} stroke="currentColor" strokeWidth="3" fill="transparent"
@@ -60,7 +58,6 @@ const CircularProgress = ({ level }) => {
           className="text-purple-600 dark:text-purple-500 transition-all duration-1000 ease-out"
         />
       </svg>
-      {/* 🟢 FIX: Adaptive Text Color */}
       <span className="absolute text-[10px] font-bold text-slate-700 dark:text-slate-300">{progress}%</span>
     </div>
   )
@@ -78,7 +75,6 @@ const SkillCard = ({ skill }) => {
   return (
     <SpotlightWrapper className="rounded-2xl h-full p-5 hover:scale-[1.02] transition-transform duration-300 shadow-sm dark:shadow-none">
       <div className="flex items-start justify-between mb-4">
-        {/* 🟢 FIX: Adaptive Icon Container */}
         <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 flex items-center justify-center text-2xl shadow-sm dark:shadow-inner text-slate-700 dark:text-slate-200">
            {/* Render icon directly since it's likely a string/emoji now */}
            {icon}
@@ -86,11 +82,9 @@ const SkillCard = ({ skill }) => {
         <CircularProgress level={level} />
       </div>
 
-      {/* 🟢 FIX: Adaptive Title */}
       <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1 tracking-tight">{name}</h3>
       
       <div className="flex items-center gap-2 mt-3">
-         {/* 🟢 FIX: Adaptive Badge */}
          <span className="px-2 py-1 rounded-md bg-slate-100 dark:bg-white/5 text-[10px] uppercase tracking-wider text-slate-600 dark:text-slate-500 font-bold border border-slate-200 dark:border-white/5">
            {parseInt(level) >= 90 ? 'Expert' : parseInt(level) >= 70 ? 'Advanced' : 'Intermediate'}
          </span>

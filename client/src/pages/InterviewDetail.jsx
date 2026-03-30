@@ -121,7 +121,6 @@ const InterviewDetail = () => {
   const dw = interview.detailedWriteup || {};
 
   return (
-    // 🟢 FIX: Main Background & Text Color
     <div className="min-h-screen bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-200 py-20 relative overflow-hidden transition-colors duration-300">
       
       {/* Background Ambience */}
@@ -156,7 +155,6 @@ const InterviewDetail = () => {
             className="lg:col-span-8 space-y-10"
           >
             {/* 1. Header Card */}
-            {/* 🟢 FIX: Adaptive Card */}
             <div className="rounded-3xl bg-white dark:bg-[#0A0A0A] border border-slate-200 dark:border-white/10 p-8 relative overflow-hidden shadow-lg dark:shadow-none">
               <div className="absolute top-0 right-0 p-32 bg-purple-600/10 dark:bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
 
@@ -210,7 +208,6 @@ const InterviewDetail = () => {
                       </div>
 
                       {/* Card */}
-                      {/* 🟢 FIX: Adaptive Round Card */}
                       <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0F0F0F] p-6 hover:border-purple-400 dark:hover:border-purple-500/30 transition-colors shadow-sm dark:shadow-none">
                         <div className="flex justify-between items-center mb-3">
                           <h4 className="text-lg font-bold text-slate-900 dark:text-slate-100">
@@ -276,7 +273,6 @@ const InterviewDetail = () => {
             {/* 3. Deep Dive Sections (System Design / Technical) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {dw.systemDesign && (
-                // 🟢 FIX: Adaptive Card
                 <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0F0F0F] p-6 shadow-sm dark:shadow-none">
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                     <Layers size={18} className="text-pink-600 dark:text-pink-400" /> System Design
@@ -288,7 +284,6 @@ const InterviewDetail = () => {
               )}
 
               {dw.technicalQuestions?.length > 0 && (
-                // 🟢 FIX: Adaptive Card
                 <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0F0F0F] p-6 shadow-sm dark:shadow-none">
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                     <Terminal size={18} className="text-green-600 dark:text-green-400" /> Technical
@@ -310,7 +305,6 @@ const InterviewDetail = () => {
 
             {/* 4. Tips for Future */}
             {dw.tipsForFuture && (
-              // 🟢 FIX: Adaptive Card
               <div className="relative rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A0A0A] p-8 text-center overflow-hidden group hover:border-purple-400 dark:hover:border-purple-500/30 transition-colors shadow-lg dark:shadow-none">
                 {/* 1. Subtle Spotlight Glow (Behind the icon) */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-purple-500/10 rounded-full blur-[60px] pointer-events-none group-hover:bg-purple-500/20 transition-colors" />
@@ -342,7 +336,6 @@ const InterviewDetail = () => {
             className="lg:col-span-4 space-y-6 lg:sticky lg:top-28"
           >
             {/* Meta Card */}
-            {/* 🟢 FIX: Adaptive Card */}
             <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0F0F0F] p-6 space-y-6 shadow-lg dark:shadow-none">
               <div>
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">
@@ -391,7 +384,6 @@ const InterviewDetail = () => {
 
             {/* Performance Summary */}
             {dw.myPerformance && (
-              // 🟢 FIX: Adaptive Card
               <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0F0F0F] p-6 shadow-sm dark:shadow-none">
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-3">
                   Performance Note

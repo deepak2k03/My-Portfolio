@@ -105,7 +105,7 @@ const NeuralCard = ({ skill, index, isDimmed, onHover, onLeave }) => {
                   {skill.name}
               </h3>
               <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                  <span className="bg-slate-100 dark:bg-white/5 px-1.5 py-0.5 rounded">Ver. {Math.floor(Math.random() * 10) + 1}.0</span>
+                  <span className="bg-slate-100 dark:bg-white/5 px-1.5 py-0.5 rounded">Ver. {(skill.name.length % 9) + 1}.0</span>
                   <span>•</span>
                   <span>Stable</span>
               </div>

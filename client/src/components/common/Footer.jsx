@@ -28,7 +28,6 @@ const Footer = () => {
   };
 
   return (
-    // 🟢 FIX: Adaptive Background & Text
     <footer className="relative bg-white dark:bg-[#050505] text-slate-600 dark:text-slate-300 overflow-hidden font-sans border-t border-slate-200 dark:border-white/5 transition-colors duration-300">
       
       {/* 1. Background Glow Effects */}
@@ -45,7 +44,6 @@ const Footer = () => {
           className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-slate-200 dark:border-white/10 pb-12"
         >
           <div className="max-w-2xl">
-            {/* 🟢 FIX: Text Color */}
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-4">
               Have an idea? <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500">
@@ -62,7 +60,6 @@ const Footer = () => {
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            // 🟢 FIX: Button Colors
             className="mt-8 md:mt-0 group relative inline-flex items-center gap-2 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-lg transition-all"
           >
             Start a Project

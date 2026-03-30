@@ -75,9 +75,9 @@ const HeroSection = () => {
 
           {/* Social Proof / Mini Icons */}
           <div className="mt-12 flex items-center gap-6 text-slate-500">
-             <a href="https://github.com/deepak2k03" className="hover:text-white transition-colors"><Github size={20} /></a>
-             <a href="https://www.linkedin.com/in/deepak-singh-1b8590257/" className="hover:text-white transition-colors"><Linkedin size={20} /></a>
-             <a href="mailto:sman59472@gmail.com" className="hover:text-white transition-colors"><Mail size={20} /></a>
+             <a href="https://github.com/deepak2k03" className="hover:text-slate-900 dark:hover:text-white transition-colors"><Github size={20} /></a>
+             <a href="https://www.linkedin.com/in/deepak-singh-1b8590257/" className="hover:text-slate-900 dark:hover:text-white transition-colors"><Linkedin size={20} /></a>
+             <a href="mailto:sman59472@gmail.com" className="hover:text-slate-900 dark:hover:text-white transition-colors"><Mail size={20} /></a>
              <div className="h-1 w-1 bg-slate-700 rounded-full" />
              <span className="text-sm">Based in India</span>
           </div>
@@ -97,7 +97,7 @@ const HeroSection = () => {
             className="relative z-10 w-72 h-72 md:w-96 md:h-96"
           >
             {/* The Glass Container for Image */}
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent p-2 backdrop-blur-sm border border-white/10 shadow-2xl shadow-purple-500/20">
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/50 dark:from-white/10 to-transparent p-2 backdrop-blur-sm border border-slate-200 dark:border-white/10 shadow-2xl shadow-purple-500/10">
               <div className="w-full h-full rounded-[1.8rem] overflow-hidden bg-slate-900 relative">
                 {/* Image Object */}
                 <img 
@@ -114,22 +114,22 @@ const HeroSection = () => {
             {/* Floating Tech Icons */}
             <motion.div 
               animate={floatAnimation(0)}
-              className="absolute -top-6 -right-6 p-4 rounded-2xl bg-[#0F0F0F] border border-white/10 shadow-xl shadow-purple-500/10 backdrop-blur-md"
+              className="absolute -top-6 -right-6 p-4 rounded-2xl bg-white dark:bg-[#0F0F0F] border border-slate-200 dark:border-white/10 shadow-xl shadow-purple-500/10 backdrop-blur-md"
             >
               <Globe className="w-8 h-8 text-blue-400" />
             </motion.div>
 
             <motion.div 
               animate={floatAnimation(1)}
-              className="absolute top-1/2 -left-12 p-3 rounded-2xl bg-[#0F0F0F] border border-white/10 shadow-xl shadow-green-500/10 backdrop-blur-md"
+              className="absolute top-1/2 -left-12 p-3 rounded-2xl bg-white dark:bg-[#0F0F0F] border border-slate-200 dark:border-white/10 shadow-xl shadow-green-500/10 backdrop-blur-md"
             >
               <Server className="w-6 h-6 text-green-400" />
             </motion.div>
 
             {/* Decorative Code Badge */}
-            <div className="absolute bottom-6 left-6 px-3 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center gap-2">
+            <div className="absolute bottom-6 left-6 px-3 py-1 rounded-full bg-white/90 dark:bg-black/60 border border-slate-200 dark:border-white/10 backdrop-blur-md flex items-center gap-2">
                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-               <span className="text-[10px] font-mono text-slate-300">System.ready()</span>
+               <span className="text-[10px] font-mono text-slate-600 dark:text-slate-300">System.ready()</span>
             </div>
 
           </motion.div>

@@ -1,53 +1,12 @@
 import { useState } from 'react'
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import SectionHeader from '../components/common/SectionHeader'
+import TiltCard from '../components/common/TiltCard'
 import { 
   Trophy, Star, Target, Globe, Code, Zap, Medal, Crown, Flame, 
   ExternalLink, Flag, Award, Terminal, Hash, Cpu, Layers, 
   Globe2
 } from 'lucide-react'
-
-// --- 1. 3D Tilt Card Component ---
-const TiltCard = ({ children, className = "" }) => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const mouseX = useSpring(x, { stiffness: 500, damping: 100 })
-  const mouseY = useSpring(y, { stiffness: 500, damping: 100 })
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["10deg", "-10deg"])
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-10deg", "10deg"])
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const width = rect.width
-    const height = rect.height
-    const mouseX = e.clientX - rect.left
-    const mouseY = e.clientY - rect.top
-    const xPct = mouseX / width - 0.5
-    const yPct = mouseY / height - 0.5
-    x.set(xPct)
-    y.set(yPct)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <motion.div
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`relative z-10 ${className}`}
-    >
-      <div style={{ transform: "translateZ(50px)" }}>
-        {children}
-      </div>
-    </motion.div>
-  )
-}
 
 // --- 2. Rarity Badge Helper ---
 const RarityBadge = ({ type }) => {
@@ -155,7 +114,7 @@ const Achievements = () => {
   const stats = [
     { label: 'Global Rank', value: 'Knight', sub: 'LeetCode', icon: Crown, color: 'text-yellow-600 dark:text-yellow-400', bg: 'bg-yellow-100 dark:bg-[#0A0A0A]' },
     { label: 'Max Rating', value: '5 Stars', sub: 'CodeChef', icon: Star, color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-100 dark:bg-[#0A0A0A]' },
-    { label: 'Rating', value: 'Expert', sub: 'Codefroces', icon: Code, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-[#0A0A0A]' },
+    { label: 'Rating', value: 'Expert', sub: 'Codeforces', icon: Code, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-[#0A0A0A]' },
     { label: 'Wins', value: '10x', sub: 'Hackathons', icon: Trophy, color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-100 dark:bg-[#0A0A0A]' },
   ]
 
@@ -175,7 +134,7 @@ const Achievements = () => {
         link: 'https://codechef.com/users/deepak2k03'
       },
       {
-        id: 3, title: 'Expert', org: 'Codeforeces', meta: '1909 Rating', rarity: 'legendary',
+        id: 3, title: 'Expert', org: 'Codeforces', meta: '1909 Rating', rarity: 'legendary',
         description: 'Participated in 70+ rounds. Specialized in rapid C++ implementation.',
         tags: ['DSA', 'Graphs'], icon: <Crown size={24} />,
         link: 'https://codeforces.com/profile/deepak2k03'
@@ -249,7 +208,7 @@ const Achievements = () => {
         tags: ['Web3', 'React'], icon: <Flame size={24} />
       },
       {
-        id: 16, title: 'Adobe India Hckathon', org: 'Adobe', meta: 'Prticipant', rarity: 'legendary',
+        id: 16, title: 'Adobe India Hackathon', org: 'Adobe', meta: 'Participant', rarity: 'legendary',
         description: 'Participated in Round 1 in this online hackathon hosted on unstop.',
         tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
       },
@@ -262,7 +221,7 @@ const Achievements = () => {
       },
       {
         id: 18, title: 'Flipkart GRID 6.0', org: 'Flipkart', meta: 'Level 3', rarity: 'rare',
-        description: 'Participated in the problem solving challeneg in this competition.',
+        description: 'Participated in the problem solving challenge in this competition.',
         tags: ['Optimization'], icon: <Medal size={24} />
       },
       {
@@ -308,12 +267,11 @@ const Achievements = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#020202] text-slate-900 dark:text-slate-50 py-24 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white py-24 relative overflow-hidden transition-colors duration-300 font-sans selection:bg-purple-500/30">
       
-      {/* Dynamic Background */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
-      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background FX (Matching Projects Page) */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
+      <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         

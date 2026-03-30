@@ -28,7 +28,6 @@ const TiltPreview = ({ activeProject }) => {
   }
 
   return (
-    // 🟢 FIX 1: Increased height to 600px for better visibility
     <div className="hidden lg:flex sticky top-24 h-[580px] w-full items-center justify-center pl-8 perspective-1000">
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
@@ -49,7 +48,7 @@ const TiltPreview = ({ activeProject }) => {
             transition={{ duration: 0.4 }}
             className="absolute inset-0 flex flex-col"
           >
-            {/* Image Section - 🟢 FIX 2: Increased height ratio to 65% */}
+            {/* Image Section - Increased height ratio to 65% */}
             <div className="relative h-[65%] w-full overflow-hidden bg-black/40 p-8 flex items-center justify-center">
                {activeProject.image ? (
                  <motion.img 
@@ -250,8 +249,6 @@ const Projects = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           
           {/* LEFT: Project List (Scrollable) */}
-          {/* 🟢 FIX: Added 'min-h-[150vh]' to force the column to be tall enough 
-              for the sticky effect to work even with only 1 project. */}
           <div className="w-full lg:w-5/12 pb-20 min-h-[150vh]">
             <AnimatePresence mode='popLayout'>
               {filteredProjects.map((project) => (

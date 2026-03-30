@@ -8,7 +8,7 @@ import {
   Terminal, // Icon for projects
   Cpu,      // Icon for experience
   Trophy,   // Icon for achievements
-  Sword     // Icon for LeetCode (alternative)
+  Swords    // Icon for LeetCode (alternative)
 } from 'lucide-react'
 
 // Specific Brand Icons from react-icons
@@ -20,7 +20,7 @@ import {
 
 export const personalInfo = {
   name: "Deepak Singh",
-  title: "Full Sack Stack Developer | Problem Solver",
+  title: "Full Stack Developer | Problem Solver",
   description: "Building scalable web applications and loving every moment of problem-solving.",
   email: "sman59472@gmail.com",
   location: "Ghazipur, Uttar Pradesh, India",
@@ -46,7 +46,7 @@ export const stats = [
   {
     label: "LeetCode",
     value: "Knight",
-    icon: Sword
+    icon: Swords
   },
   {
     label: "Projects Completed",
