@@ -9,6 +9,7 @@ import Countries_Explorer from '../image/Countries_Explorer.png';
 import DSA_Sheet from '../image/DSA_Sheet.png';
 import digitalAgency from '../image/digitalAgency.png'
 import nextflow from '../image/nextflow.png'
+import resqfood from '../image/resqfood.png'
 export const projects = [
   {
     id: 1,
@@ -41,6 +42,35 @@ export const projects = [
   },
   {
     id: 2,
+    title: "NextFlow",
+    description: "A visual LLM workflow builder inspired by Krea.ai. Build node-based pipelines with Text, Image, Video, and AI nodes; run them via Trigger.dev; and persist workflows and run history in PostgreSQL.",
+    image: nextflow,
+    techStack: ["Next.js", "TypeScript", "Transloadit", "React Flow", "Clerk", "Tailwind CSS","Trigger.dev","Gemini API","FFmpeg","Transloadit","zod","prisma"],
+    liveDemo: "https://next-flow-gray.vercel.app/",
+    githubRepo: "https://github.com/deepak2k03/NextFlow",
+    featured: true,
+    category: "Full Stack",
+    tags: ["Next.js", "clerk", "Prisma", "workflow","react flow"],
+    features: [
+      "Workflow canvas",
+      "6 Node types",
+      "Animated purple edge connections between nodes",
+      "Saving workflows",
+      "Watch node run history",
+      "Support for undo and redo",
+      "Responsive design for all devices"
+    ],
+    role: "Full Stack Developer",
+    duration: "1 week",
+    challenges: [
+      "Implementing JSON Data handling",
+      "Integrating trigger.dev",
+      "Handling errors",
+      "Building responsiveness for all devices"
+    ]
+  },
+  {
+    id: 3,
     title: "PublicEye",
     description: "A web-based platform that tracks and displays government contracts, permits, and approvals in real time using blockchain technology.",
     image: PublicEye,
@@ -69,7 +99,7 @@ export const projects = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: "NeoCube",
     description: "NeoCube uses Gemini AI to generate precise, step-by-step learning roadmaps for any technology. Stop searching, start building.",
     longDescription: "Developed a full-stack MERN web platform that enables users to discover and track newly emerging technologies and frameworks, helping them stay aligned with industry trends. The platform integrates dynamic modules for curated learning resources and intelligent tool comparisons to support efficient upskilling. It also features automated insights and recommendation mechanisms that suggest cost-effective and sustainable technology alternatives, enhancing decision-making. AI-powered content categorization and trend analysis were leveraged to automate technology tracking workflows and deliver relevant, data-driven recommendations to users.",
@@ -99,7 +129,7 @@ export const projects = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: "SkillBridge",
     description: "Analytics dashboard for social media management with data visualization and automated reporting.",
     longDescription: "Comprehensive social media analytics dashboard that aggregates data from multiple platforms. Features include customizable widgets, automated reporting, sentiment analysis, competitor tracking, and export capabilities. Built with focus on performance and data visualization.",
@@ -129,7 +159,7 @@ export const projects = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: "Dtube",
     description: "A full stack MERN Based web based youtube like Platform for video sharing",
     longDescription: "Engineered a full-stack e-commerce platform with a modern, highly responsive user interface optimized for 100% mobile compatibility to deliver a smooth and intuitive user experience. Implemented JWT-based authentication with role-based authorization to ensure secure access control, achieving an average login and signup response time of under 200 ms. Designed an efficient product search and filtering system based on parameters such as discounts and availability, improving product discoverability and reducing search time by 40%. Built a dynamic shopping cart with real-time quantity management and zero page reloads, successfully supporting over 100 concurrent users during testing. Additionally, developed a robust admin dashboard for product CRUD operations and inventory management, reducing manual operational effort by 50%.",
@@ -160,7 +190,7 @@ export const projects = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     title: "Portfolio Website",
     description: "My personal portfolio website",
     longDescription: "A modern, minimalist, highly interactive personal portfolio website built with the MERN stack. Features dark/light mode toggle, smooth animations, interview experiences, and comprehensive project showcases.",
@@ -191,7 +221,7 @@ export const projects = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     title: "Multimind",
     description: "An AI Models comparison platform",
     longDescription: "A Next.js application that allows users to compare responses from multiple AI models simultaneously using OpenRouter. Features include a responsive UI and real-time streaming responses.",
@@ -219,7 +249,7 @@ export const projects = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     title: "Code Complexity Analyser",
     description: "A platform to analyze the time and space complexity of your code",
     longDescription: "An online platform where you can know the time and space complexitites of your code in your preferable language in real time.",
@@ -244,7 +274,7 @@ export const projects = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     title: "REST Countries Explorer",
     description: "Real-time weather tracking app with location services, forecasts, and interactive maps.",
     longDescription: "A beautiful weather application that provides accurate weather information with stunning visualizations. Features include location-based weather, extended forecasts, interactive maps, weather alerts, and customizable widgets. Integrates with multiple weather APIs for accuracy.",
@@ -271,7 +301,7 @@ export const projects = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     title: "DSA Sheet",
     description: "A Complete Sheet of problems for practicing DSA",
     longDescription: "A curated Sheet consisting of problems on Data Structures and Algorithms for practicing.",
@@ -298,7 +328,7 @@ export const projects = [
     ]
   },
   {
-    id: 11,
+    id: 12,
     title: "Digital Agency Page",
     description: "A Professional page for Digital Agency",
     longDescription: "This is a professional level page for a digital agency",
