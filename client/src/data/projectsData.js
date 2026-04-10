@@ -15,7 +15,7 @@ export const projects = [
     id: 1,
     title: "ResQFood",
     description: "ResQFood connects food donors and NGOs in real time, helping cities redirect surplus food where it is needed most. Build trust, move faster, and measure impact from one platform.",
-    image: nextflow,
+    image: resqfood,
     techStack: ["React.js", "Nodemailer", "Elevenlabs", "Gemini API", "Cloudinary", "Tailwind CSS","Zustand"],
     liveDemo: "https://res-q-food-00.vercel.app/",
     githubRepo: "https://github.com/deepak2k03/ResQFood",
