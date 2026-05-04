@@ -10,7 +10,7 @@ import DSA_Sheet from '../image/DSA_Sheet.png';
 import digitalAgency from '../image/digitalAgency.png'
 import nextflow from '../image/nextflow.png'
 import resqfood from '../image/resqfood.png'
-import HiveMind from './/image/HiveMind.png'
+import HiveMind from '../image/HiveMind.png'
 export const projects = [
   {
     id: 1,
