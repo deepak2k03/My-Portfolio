@@ -94,6 +94,9 @@ const TimelineBeam = ({ reference }) => {
 
 const Experience = () => {
   const containerRef = useRef(null);
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
   const experiences = [
     {
@@ -211,12 +214,11 @@ const Experience = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020202] text-slate-900 dark:text-slate-200 py-24 relative overflow-hidden transition-colors duration-300">
-      {/* Dynamic Background Noise */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-      {/* Ambient Orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-purple-600/10 dark:bg-purple-900/10 rounded-[100%] blur-[120px] pointer-events-none" />
+    <div className="relative min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white font-sans overflow-hidden selection:bg-purple-500/30 transition-colors duration-300 py-24">
+      {/* Background FX (Matching Home Page) */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
+      <motion.div style={{ y: y1 }} className="fixed top-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
+      <motion.div style={{ y: y2 }} className="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
 
       <div className="container-custom relative z-10 max-w-6xl mx-auto px-4">
         {/* Header */}
