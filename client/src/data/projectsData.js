@@ -10,6 +10,7 @@ import DSA_Sheet from '../image/DSA_Sheet.png';
 import digitalAgency from '../image/digitalAgency.png'
 import nextflow from '../image/nextflow.png'
 import resqfood from '../image/resqfood.png'
+import HiveMind from './/image/HiveMind.png'
 export const projects = [
   {
     id: 1,
@@ -328,23 +329,24 @@ export const projects = [
   },
   {
     id: 12,
-    title: "Digital Agency Page",
-    description: "A Professional page for Digital Agency",
-    longDescription: "This is a professional level page for a digital agency",
-    image: digitalAgency,
+    title: "HiveMind",
+    description: "Collaborative AI Model Training Platform",
+    longDescription: "Train AI models together without ever sharing your data. Your devices. One collective brain.",
+    image: HiveMind,
     techStack: ["React", "TailwindCSS", "JavaScript"],
-    liveDemo: "https://assesment-react.netlify.app/",
-    githubRepo: "https://github.com/deepak2k03/Hike-Digital-Agency-Assessment",
+    liveDemo: "https://hive-mind-eta-red.vercel.app/",
+    githubRepo: "https://github.com/deepak2k03/HiveMind",
     featured: false,
-    category: "Frontend",
-    tags: ["React", "TailwindCSS", "JavaScript"],
+    category: "Full Stack",
+    tags: ["React", "TailwindCSS", "JavaScript","NodeJS","ExpressJS"],
     features: [
       "Responsive Design",
       "Professional UI",
-      "Smooth animations"
+      "Smooth animations",
+      "3D Animated Website",
     ],
-    role: "Frontend Developer",
-    duration: "2 Days",
+    role: "Full Stack Developer",
+    duration: "3 Months",
     challenges: [
       "Creating smooth animations",
       "Optimizing for mobile performance"
