@@ -29,7 +29,7 @@ export const personalInfo = {
   // 📄 RESUME LINK:
   // Option 1: Put 'resume.pdf' in your 'client/public' folder
   // Option 2: Paste your Google Drive link here (make sure it's public)
-  resume: "https://drive.google.com/file/d/1WIST7E8u9AiI9jWWXNtB6YhsF1ylD0RS/view?usp=sharing" 
+  resume: "https://drive.google.com/file/d/13lMSCun06a2qqBpxiCfH5gRMyaazrqSM/view?usp=sharing"
 }
 
 export const stats = [
