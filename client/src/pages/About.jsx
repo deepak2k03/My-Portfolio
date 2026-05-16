@@ -77,7 +77,7 @@ const About = () => {
       { label: 'Stack', value: 'MERN', icon: Cpu, color: 'text-yellow-600 dark:text-yellow-400' },
    ]
 
-   const coreTech = ['C++', 'Python', 'JavaScript', 'TailwindCSS', 'Material UI', 'Shadcn', 'React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Next.js', 'Blockchain', 'React-Native']
+   const coreTech = ['C++', 'Python', ,'Java', 'JavaScript', 'TailwindCSS', 'Material UI', 'Shadcn', 'React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Next.js', 'Blockchain', 'React-Native']
 
    return (
       <div className="min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white py-20 relative overflow-hidden transition-colors duration-300 font-sans selection:bg-purple-500/30">
