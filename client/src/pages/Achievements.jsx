@@ -190,12 +190,12 @@ const Achievements = () => {
       {
         id: 12, title: 'HackByte 3.0', org: 'IIIT Jabalpur', meta: 'Finalist', rarity: 'Rare',
         description: 'Selected among Top 120 teams across India. Built a skill exchanging platform',
-        tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
+        tags: ['MERN', 'Leadership'], icon: <Trophy size={24} />
       },
       {
         id: 13, title: 'Zeros Arena', org: 'Code Geass', meta: 'Participant', rarity: 'epic',
         description: 'Created a web based virtual herbal garden using MERN stack.',
-        tags: ['Web3', 'React'], icon: <Flame size={24} />
+        tags: ['MERN', 'React'], icon: <Flame size={24} />
       },
       {
         id: 14, title: 'Hack-o-Gravity', org: 'KNIT Sultanpur', meta: 'Participant', rarity: 'epic',
@@ -212,6 +212,12 @@ const Achievements = () => {
         description: 'Participated in Round 1 in this online hackathon hosted on unstop.',
         tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
       },
+      {
+        id: 17, title: 'HackByte 4.0', org: 'IIIT Jabalpur', meta: 'Finalist', rarity: 'Rare',
+        description: 'Selected among Top 120 teams across India. Built a food redistribution platform',
+        tags: ['IoT', 'Leadership'], icon: <Trophy size={24} />
+      },
+
     ],
     competitions: [
       {
