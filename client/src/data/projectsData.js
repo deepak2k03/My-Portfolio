@@ -11,6 +11,7 @@ import digitalAgency from '../image/digitalAgency.png'
 import nextflow from '../image/nextflow.png'
 import resqfood from '../image/resqfood.png'
 import HiveMind from '../image/HiveMind.png'
+import AppBuilder from '../image/AppBuilder.png'
 export const projects = [
   {
     id: 1,
@@ -347,6 +348,31 @@ export const projects = [
     ],
     role: "Full Stack Developer",
     duration: "3 Months",
+    challenges: [
+      "Creating smooth animations",
+      "Optimizing for mobile performance"
+    ]
+  },
+  {
+    id: 13,
+    title: "AppBuilder",
+    description: "A production-grade AI App Builder UI that prioritizes user trust and safety through a strict Prompt → Plan → Apply workflow.",
+    longDescription: "This is a frontend project",
+    image: AppBuilder,
+    techStack: ["React", "TailwindCSS", "JavaScript"],
+    liveDemo: "https://the-ai-signal-assignment.vercel.app/",
+    githubRepo: "https://github.com/deepak2k03/The-AI-Signal-Assignment",
+    featured: false,
+    category: "Frontend",
+    tags: ["React", "TailwindCSS", "JavaScript","NodeJS","ExpressJS"],
+    features: [
+      "Responsive Design",
+      "Professional UI",
+      "Smooth animations",
+      "3D Animated Website",
+    ],
+    role: "Full Stack Developer",
+    duration: "12 Days",
     challenges: [
       "Creating smooth animations",
       "Optimizing for mobile performance"
