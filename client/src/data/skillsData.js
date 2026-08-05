@@ -34,7 +34,10 @@ export const skillsCategories = [
     skills: [
       { name: 'Git', level: 90, icon: '🐙' },
       { name: 'GitHub', level: 90, icon: '🐙' },
-      { name: 'Docker', level: 60, icon: '🐳' },
+      { name: 'Docker', level: 90, icon: '🐳' },
+      { name: 'Linux', level: 90, icon: '🐳' },
+      { name: 'Jenkins', level: 90, icon: '🐳' },
+      { name: 'Kubernetes', level: 90, icon: '🐳' },
       { name: 'AWS', level: 50, icon: '☁️' },
       { name: 'Postman', level: 95, icon: '🚀' },
       { name: 'VS Code', level: 100, icon: '📝' },
