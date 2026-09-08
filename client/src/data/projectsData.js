@@ -4,14 +4,14 @@ import SkillBridge from '../image/SkillBridge.png';
 import Portfolio from '../image/Portfolio.png';
 import Multimind from '../image/Multimind.png';
 import Dtube from '../image/Dtube.png';
-import Code_Complexity_Analyser from '../image/Code_Complexity_Analyser.png';
+import SMTS from '../image/SMTS.png'
 import Countries_Explorer from '../image/Countries_Explorer.png'; 
 import DSA_Sheet from '../image/DSA_Sheet.png';
-import digitalAgency from '../image/digitalAgency.png'
+// import digitalAgency from '../image/digitalAgency.png'
 import nextflow from '../image/nextflow.png'
 import resqfood from '../image/resqfood.png'
 import HiveMind from '../image/HiveMind.png'
-import AppBuilder from '../image/AppBuilder.png'
+import MINI_AWS from '../image/MINI_AWS.png'
 export const projects = [
   {
     id: 1,
@@ -131,30 +131,28 @@ export const projects = [
   },
   {
     id: 5,
-    title: "SkillBridge",
-    description: "Analytics dashboard for social media management with data visualization and automated reporting.",
-    longDescription: "Comprehensive social media analytics dashboard that aggregates data from multiple platforms. Features include customizable widgets, automated reporting, sentiment analysis, competitor tracking, and export capabilities. Built with focus on performance and data visualization.",
-    image: SkillBridge,
-    techStack: ["React", "Socket.io", "Node.js", "Express", "MongoDB", "JWT", "REST APIs"],
-    liveDemo: "https://skill-bridge-frontend.onrender.com/",
-    githubRepo: "https://github.com/deepak2k03/Skill-Bridge",
-    featured: false,
+    title: "Mini AWS",
+    description: "local cloud-instance management system",
+    longDescription: "Build a lightweight, local cloud-instance management system that lets authenticated users launch, view, start, stop, restart, and delete isolated SSH-enabled Docker containers.",
+    image: MINI_AWS,
+    techStack: ["React", "Node", "Docker", "Express", "MongoDB", "OpenSSH", "REST APIs"],
+    liveDemo: "https://github.com/deepak2k03/Mini-AWS",
+    githubRepo: "https://github.com/deepak2k03/Mini-AWS",
+    featured: true,
     category: "Full Stack",
-    tags: ["React", "Node", "Express", "MongoDB", "JWT"],
+    tags: ["React", "Node", "Express", "MongoDB", "Docker"],
     features: [
-      "Skill Exchanging",
-      "Responsive UI",
-      "Verification of Users",
-      "Rating and Feedback",
-      "Progress Tracking",
-      "Adding to Favourites",
-      "Real time Skill Matching"
+      "Instance creation",
+      "Create Instances Using prompts",
+      "SSH from your local to virtual instance",
+      "SSH from one instance to another",
+      "Web interface"
     ],
     role: "Full Stack Developer",
-    duration: "6 weeks",
+    duration: "1 week",
     challenges: [
-      "Handling large datasets efficiently",
-      "Implementing real time skill matching",
+      "Providing complete instance features",
+      "Implementing AI",
       "Implementing real-time data updates",
       "Optimizing performance for data visualization"
     ]
@@ -251,25 +249,25 @@ export const projects = [
   },
   {
     id: 9,
-    title: "Code Complexity Analyser",
-    description: "A platform to analyze the time and space complexity of your code",
-    longDescription: "An online platform where you can know the time and space complexitites of your code in your preferable language in real time.",
-    image: Code_Complexity_Analyser,
-    techStack: ["React", "TailwindCSS"],
-    liveDemo: "https://code-complexity-analyser.netlify.app/",
-    githubRepo: "https://github.com/deepak/deepak2k03",
+    title: "Planora AI",
+    description: "Smart Task Management System",
+    longDescription: "Planora AI is a modern full-stack MERN application that helps users manage their daily tasks efficiently using Artificial Intelligence.",
+    image: SMTS,
+    techStack: ["ReactJS", "NodeJS", "ExpressJS", "MongoDB", "TailwindCSS"],
+    liveDemo: "https://smart-task-management-system-alpha.vercel.app/",
+    githubRepo: "https://github.com/deepak2k03/Smart-Task-Management-System",
     featured: false,
-    category: "Frontend",
-    tags: ["React", "Weather API", "Maps", "Geolocation", "Frontend"],
+    category: "Full Stack",
+    tags: ["React", "Gemini API", "Speech Recognition", "AI", "Full Stack"],
     features: [
-      "Real-time code complexity analysis",
-      "Supports multiple languages",
-      "Responsive Design"
+      "Voice-to-Task Creation",
+      "peech Recognition using Browser API",
+      "Google Gemini Integration"
     ],
-    role: "Frontend Developer",
-    duration: "1 weeks",
+    role: "Full Stack Developer",
+    duration: "1 week",
     challenges: [
-      "Integrating Complexity calculation",
+      "Integrating AI",
       "Creating smooth animations",
       "Optimizing for mobile performance"
     ]
@@ -348,31 +346,6 @@ export const projects = [
     ],
     role: "Full Stack Developer",
     duration: "3 Months",
-    challenges: [
-      "Creating smooth animations",
-      "Optimizing for mobile performance"
-    ]
-  },
-  {
-    id: 13,
-    title: "AppBuilder",
-    description: "A production-grade AI App Builder UI that prioritizes user trust and safety through a strict Prompt → Plan → Apply workflow.",
-    longDescription: "This is a frontend project",
-    image: AppBuilder,
-    techStack: ["React", "TailwindCSS", "JavaScript"],
-    liveDemo: "https://the-ai-signal-assignment.vercel.app/",
-    githubRepo: "https://github.com/deepak2k03/The-AI-Signal-Assignment",
-    featured: false,
-    category: "Frontend",
-    tags: ["React", "TailwindCSS", "JavaScript","NodeJS","ExpressJS"],
-    features: [
-      "Responsive Design",
-      "Professional UI",
-      "Smooth animations",
-      "3D Animated Website",
-    ],
-    role: "Full Stack Developer",
-    duration: "12 Days",
     challenges: [
       "Creating smooth animations",
       "Optimizing for mobile performance"
