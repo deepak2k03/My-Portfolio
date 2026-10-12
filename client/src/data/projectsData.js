@@ -1,18 +1,45 @@
 import PublicEye from '../image/PublicEye.png';
 import NeoCube from '../image/NeoCube.png';
-import SkillBridge from '../image/SkillBridge.png';
 import Portfolio from '../image/Portfolio.png';
 import Multimind from '../image/Multimind.png';
 import Dtube from '../image/Dtube.png';
 import SMTS from '../image/SMTS.png'
 import Countries_Explorer from '../image/Countries_Explorer.png'; 
 import DSA_Sheet from '../image/DSA_Sheet.png';
-// import digitalAgency from '../image/digitalAgency.png'
 import nextflow from '../image/nextflow.png'
 import resqfood from '../image/resqfood.png'
 import HiveMind from '../image/HiveMind.png'
 import MINI_AWS from '../image/MINI_AWS.png'
+import CareerQuant from '../image/CareerQuant.png'
 export const projects = [
+  {
+    id: 13,
+    title: "CreerQuant",
+    description: "Find your path, learn the right skills, build real projects, and prepare for the interviews that matter — all in one place.",
+    image: CareerQuant,
+    techStack: ["React.js", "Resend", "Elevenlabs", "Gemini API", "Cloudinary", "Tailwind CSS","Zustand", "OAuth"],
+    liveDemo: "https://www.careerquant.in/",
+    githubRepo: "https://www.careerquant.in/",
+    featured: true,
+    category: "Full Stack",
+    tags: ["MERN", "Elevenlabs", "Zustand", "Gemini API"],
+    features: [
+      "Role-based experience for Students, Mentors, and Admin.",
+      "Real-time chatting system via Socket.IO.",
+      "OAuth Authentication",
+      "Complaint center with admin-side resolution workflow.",
+      "Learning roadmaps",
+      "Analytics dashboard to track platform impact."
+    ],
+    role: "Full Stack Developer",
+    duration: "10 week",
+    challenges: [
+      "Implementing JSON Data handling",
+      "Building a monoreppo app",
+      "Handling errors",
+      "Building responsiveness for all devices"
+    ]
+  },
   {
     id: 1,
     title: "ResQFood",
